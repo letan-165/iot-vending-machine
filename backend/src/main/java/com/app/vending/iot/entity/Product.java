@@ -19,7 +19,6 @@ public class Product {
     String machineId;
     String name;
     Double price;
-    Integer quantity;
     String image;
     ProductStatus status;
 }

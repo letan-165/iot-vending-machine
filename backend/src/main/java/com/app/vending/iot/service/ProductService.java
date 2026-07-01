@@ -44,7 +44,6 @@ public class ProductService {
                 .name(request.getName())
                 .price(request.getPrice())
                 .image(request.getImage())
-                .quantity(request.getQuantity())
                 .status(request.getStatus())
                 .build();
 
