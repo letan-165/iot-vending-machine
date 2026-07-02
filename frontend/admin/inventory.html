@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inventory Management | Vending Admin</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="../assets/css/style.css" rel="stylesheet">
+</head>
+<body data-page="inventory">
+  <div class="app-shell">
+    <aside id="sidebar" class="sidebar"></aside>
+    <main class="main-content">
+      <div class="topbar">
+        <div>
+          <h1 class="page-title">Inventory Management</h1>
+          <p class="page-subtitle">Quản lý tồn kho, nhập hàng và xem lịch sử import/sale/adjustment.</p>
+        </div>
+        <div class="d-flex gap-2 flex-wrap"></div>
+      </div>
+
+      
+      <div class="row g-4">
+        <div class="col-12 col-xl-7">
+          <section class="panel">
+            <div class="panel-header">
+              <div>
+                <h2 class="h5 fw-bold mb-1">Tồn kho sản phẩm</h2>
+                <div class="text-muted small">Admin có thể nhập thêm hoặc điều chỉnh số lượng.</div>
+              </div>
+              <button class="btn btn-primary" onclick="openInventoryModal('IMPORT')"><i class="bi bi-plus-circle me-1"></i> Nhập thêm</button>
+            </div>
+            <div id="inventoryTable" class="panel-body"></div>
+          </section>
+        </div>
+        <div class="col-12 col-xl-5">
+          <section class="panel">
+            <div class="panel-header">
+              <div>
+                <h2 class="h5 fw-bold mb-1">Inventory Logs</h2>
+                <div class="text-muted small">Lịch sử nhập/xuất/điều chỉnh kho.</div>
+              </div>
+            </div>
+            <div id="inventoryLogs" class="panel-body"></div>
+          </section>
+        </div>
+      </div>
+
+      <div class="modal fade" id="inventoryModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content rounded-4">
+            <div class="modal-header">
+              <h5 id="inventoryModalTitle" class="modal-title fw-bold">Nhập kho</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <input type="hidden" id="inventoryType">
+              <div class="mb-3">
+                <label for="inventoryProductId" class="form-label">Sản phẩm</label>
+                <select id="inventoryProductId" class="form-select"></select>
+              </div>
+              <div class="mb-3">
+                <label for="inventoryQuantity" class="form-label">Số lượng</label>
+                <input id="inventoryQuantity" type="number" class="form-control" placeholder="Nhập số dương hoặc âm khi điều chỉnh">
+                <div class="form-text">IMPORT dùng số dương. ADJUSTMENT có thể dùng số âm.</div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-light" data-bs-dismiss="modal">Hủy</button>
+              <button type="button" class="btn btn-primary" onclick="submitInventoryForm()">Lưu tồn kho</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/data.js"></script>
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
