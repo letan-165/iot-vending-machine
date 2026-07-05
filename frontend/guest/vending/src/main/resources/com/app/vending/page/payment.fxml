@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.app.vending.controller.PaymentController"
+            prefWidth="400"
+            prefHeight="711"
+            style="-fx-background-color:#F5F7FA;">
+
+    <!-- HEADER -->
+    <top>
+        <HBox alignment="CENTER"
+              prefHeight="60"
+              style="-fx-background-color:#1976D2;">
+
+            <Label text="THANH TOÁN"
+                   style="-fx-text-fill:white;
+                          -fx-font-size:20px;
+                          -fx-font-weight:bold;"/>
+        </HBox>
+    </top>
+
+    <!-- CONTENT -->
+    <center>
+
+        <ScrollPane fitToWidth="true"
+                    hbarPolicy="NEVER"
+                    style="-fx-background-color:transparent;
+                           -fx-background:transparent;">
+
+            <VBox spacing="18">
+
+                <padding>
+                    <Insets top="18" right="18" bottom="18" left="18"/>
+                </padding>
+
+                <!-- DANH SÁCH SẢN PHẨM -->
+                <VBox spacing="12"
+                      style="
+                          -fx-background-color:white;
+                          -fx-background-radius:16;
+                          -fx-border-color:#E5E7EB;
+                          -fx-border-radius:16;
+                          -fx-padding:18;
+                      ">
+
+                    <Label text="Sản phẩm đã chọn"
+                           style="
+                               -fx-font-size:16px;
+                               -fx-font-weight:bold;
+                               -fx-text-fill:#222222;
+                           "/>
+
+                    <!-- Header -->
+                    <HBox spacing="10">
+
+                        <Label text="Sản phẩm"
+                               minWidth="180"
+                               style="
+                                   -fx-font-size:12px;
+                                   -fx-text-fill:#9CA3AF;
+                                   -fx-font-weight:bold;
+                               "/>
+
+                        <Label text="SL"
+                               minWidth="40"
+                               alignment="CENTER"
+                               style="
+                                   -fx-font-size:12px;
+                                   -fx-text-fill:#9CA3AF;
+                                   -fx-font-weight:bold;
+                               "/>
+
+                        <Label text="Thành tiền"
+                               style="
+                                   -fx-font-size:12px;
+                                   -fx-text-fill:#9CA3AF;
+                                   -fx-font-weight:bold;
+                               "/>
+
+                    </HBox>
+
+                    <Separator/>
+
+                    <!-- Danh sách -->
+                    <VBox fx:id="itemListBox"
+                          spacing="8"/>
+
+                    <Separator/>
+
+                    <HBox alignment="CENTER_RIGHT">
+
+                        <Label fx:id="lblTotal"
+                               text="Tổng: 0 VNĐ"
+                               style="
+                                   -fx-font-size:18px;
+                                   -fx-font-weight:bold;
+                                   -fx-text-fill:#1976D2;
+                               "/>
+
+                    </HBox>
+
+                </VBox>
+
+                <!-- QR -->
+                <VBox alignment="CENTER"
+                      spacing="14"
+                      style="
+                          -fx-background-color:white;
+                          -fx-background-radius:16;
+                          -fx-border-color:#E5E7EB;
+                          -fx-border-radius:16;
+                          -fx-padding:20;
+                      ">
+
+                    <Label text="Quét mã QR để thanh toán"
+                           style="
+                               -fx-font-size:16px;
+                               -fx-font-weight:bold;
+                               -fx-text-fill:#222222;
+                           "/>
+
+                    <VBox fx:id="qrBox"
+                          alignment="CENTER"
+                          prefWidth="220"
+                          prefHeight="220"
+                          style="
+                              -fx-background-color:white;
+                              -fx-border-color:#D1D5DB;
+                              -fx-border-width:2;
+                              -fx-border-radius:12;
+                              -fx-background-radius:12;
+                              -fx-padding:12;
+                          "/>
+
+                    <Label text="MoMo • VNPay • ZaloPay"
+                           style="
+                               -fx-font-size:12px;
+                               -fx-text-fill:#6B7280;
+                           "/>
+
+                </VBox>
+
+            </VBox>
+
+        </ScrollPane>
+
+    </center>
+
+    <!-- FOOTER -->
+    <bottom>
+
+        <VBox alignment="CENTER"
+              prefHeight="56"
+              style="
+                  -fx-background-color:white;
+                  -fx-border-color:#E5E7EB;
+                  -fx-border-width:1 0 0 0;
+              ">
+
+            <Label fx:id="lblCountdown"
+                   text="Tự động chuyển sau 3 giây"
+                   style="
+                       -fx-font-size:14px;
+                       -fx-font-weight:bold;
+                       -fx-text-fill:#F59E0B;
+                   "/>
+
+        </VBox>
+
+    </bottom>
+
+</BorderPane>

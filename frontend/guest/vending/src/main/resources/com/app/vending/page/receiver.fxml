@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.app.vending.controller.ReceiverController"
+            prefWidth="800"
+            prefHeight="700"
+            style="-fx-background-color:#F5F7FA;">
+
+    <!-- HEADER -->
+    <top>
+        <HBox alignment="CENTER"
+              prefHeight="60"
+              style="-fx-background-color:#1976D2;">
+
+            <Label text="SMART VENDING MACHINE"
+                   style="
+                        -fx-font-size:22px;
+                        -fx-font-weight:bold;
+                        -fx-text-fill:white;
+                   "/>
+
+        </HBox>
+    </top>
+
+    <!-- CONTENT -->
+    <center>
+
+        <StackPane>
+
+            <VBox fx:id="rootBox"
+                  alignment="CENTER"
+                  spacing="18"
+                  opacity="0"
+                  maxWidth="500"
+                  style="
+                        -fx-background-color:white;
+                        -fx-background-radius:18;
+                        -fx-border-color:#E5E7EB;
+                        -fx-border-radius:18;
+                        -fx-padding:35;
+                  ">
+
+                <!-- Icon -->
+                <Label text="🎉"
+                       style="-fx-font-size:72px;"/>
+
+                <!-- Tiêu đề -->
+                <Label fx:id="lblMessage"
+                       text="Vui lòng nhận hàng!"
+                       wrapText="true"
+                       alignment="CENTER"
+                       style="
+                            -fx-font-size:28px;
+                            -fx-font-weight:bold;
+                            -fx-text-fill:#1976D2;
+                       "/>
+
+                <!-- Nội dung -->
+                <Label fx:id="lblSub"
+                       text="Cảm ơn bạn đã sử dụng Smart Vending Machine."
+                       wrapText="true"
+                       alignment="CENTER"
+                       style="
+                            -fx-font-size:15px;
+                            -fx-text-fill:#6B7280;
+                       "/>
+
+                <Separator prefWidth="320"/>
+
+                <!-- Đếm ngược -->
+                <Label fx:id="lblCountdown"
+                       text="Tự động quay về sau 5 giây"
+                       style="
+                            -fx-font-size:14px;
+                            -fx-font-weight:bold;
+                            -fx-text-fill:#F59E0B;
+                       "/>
+
+            </VBox>
+
+        </StackPane>
+
+    </center>
+
+    <!-- FOOTER -->
+    <bottom>
+
+        <HBox alignment="CENTER"
+              prefHeight="52"
+              style="
+                    -fx-background-color:white;
+                    -fx-border-color:#E5E7EB;
+                    -fx-border-width:1 0 0 0;
+              ">
+
+            <Label text="© Smart Vending Machine"
+                   style="
+                        -fx-font-size:13px;
+                        -fx-text-fill:#6B7280;
+                   "/>
+
+        </HBox>
+
+    </bottom>
+
+</BorderPane>
