@@ -21,4 +21,5 @@ public class Product {
     Double price;
     String image;
     ProductStatus status;
+
 }

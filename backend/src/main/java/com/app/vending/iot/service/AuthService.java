@@ -1,13 +1,8 @@
 package com.app.vending.iot.service;
 
-import com.app.vending.iot.common.enums.UserRole;
 import com.app.vending.iot.common.exception.AppException;
 import com.app.vending.iot.common.exception.ErrorCode;
-import com.app.vending.iot.dto.request.LoginRequest;
 import com.app.vending.iot.dto.request.TokenRequest;
-import com.app.vending.iot.dto.request.UserSignUpRequest;
-import com.app.vending.iot.dto.response.LoginResponse;
-import com.app.vending.iot.dto.response.UserResponse;
 import com.app.vending.iot.entity.User;
 import com.app.vending.iot.repository.UserRepository;
 import com.nimbusds.jose.*;
