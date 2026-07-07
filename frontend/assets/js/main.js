@@ -1,12 +1,43 @@
 const page = document.body.dataset.page;
 
 const navItems = [
-  { href: "dashboard.html", page: "dashboard", icon: "bi-speedometer2", label: "Dashboard" },
-  { href: "products.html", page: "products", icon: "bi-cup-straw", label: "Sản phẩm" },
-  { href: "orders.html", page: "orders", icon: "bi-receipt", label: "Đơn hàng" },
+  {
+    href: "dashboard.html",
+    page: "dashboard",
+    icon: "bi-speedometer2",
+    label: "Dashboard",
+  },
+  {
+    href: "products.html",
+    page: "products",
+    icon: "bi-cup-straw",
+    label: "Sản phẩm",
+  },
+  {
+    href: "inventory.html",
+    page: "inventory",
+    icon: "bi-box-seam",
+    label: "Tồn kho",
+  },
+  {
+    href: "orders.html",
+    page: "orders",
+    icon: "bi-receipt",
+    label: "Đơn hàng",
+  },
   { href: "users.html", page: "users", icon: "bi-people", label: "Tài khoản" },
-  { href: "machines.html", page: "machines", icon: "bi-hdd-rack", label: "Máy bán nước" },
-  { href: "reports.html", page: "reports", icon: "bi-bar-chart-line", label: "Báo cáo" },
+  {
+    href: "machines.html",
+    page: "machines",
+    icon: "bi-hdd-rack",
+    label: "Máy bán nước",
+  },
+  {
+    href: "reports.html",
+    page: "reports",
+    icon: "bi-bar-chart-line",
+    label: "Báo cáo",
+  },
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -16,6 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   renderSidebar();
+  bindMobileMenuEvents();
 
   const renderers = {
     dashboard: renderDashboard,
@@ -44,23 +76,36 @@ function renderSidebar() {
   if (!sidebar) return;
 
   sidebar.innerHTML = `
-    <div class="brand">
-      <div class="brand-icon"><i class="bi bi-hdd-rack"></i></div>
-      <div>
-        <div class="brand-title">Vending Admin</div>
-        <div class="brand-subtitle">Admin workspace</div>
+    <div class="sidebar-header">
+      <div class="brand">
+        <div class="brand-icon"><i class="bi bi-hdd-rack"></i></div>
+        <div>
+          <div class="brand-title">Vending Admin</div>
+          <div class="brand-subtitle">Admin workspace</div>
+        </div>
       </div>
+
+      <button
+        type="button"
+        class="mobile-menu-btn"
+        aria-label="Mở menu"
+        aria-controls="sidebarNav"
+        aria-expanded="false"
+      >
+        <i class="bi bi-list"></i>
+        <span>Menu</span>
+      </button>
     </div>
 
-    <nav class="nav flex-column">
+    <nav id="sidebarNav" class="nav flex-column">
       ${navItems.map(renderNavItem).join("")}
     </nav>
 
-    <hr class="border-secondary">
-
-    <button class="btn btn-outline-light btn-sm w-100" onclick="logout()">
-      <i class="bi bi-box-arrow-right me-1"></i> Đăng xuất
-    </button>
+    <div class="sidebar-footer">
+      <button class="btn btn-outline-light btn-sm w-100" onclick="logout()">
+        <i class="bi bi-box-arrow-right me-1"></i> Đăng xuất
+      </button>
+    </div>
   `;
 }
 
@@ -75,6 +120,58 @@ function renderNavItem(item) {
   `;
 }
 
+function toggleMobileMenu() {
+  const sidebar = document.getElementById("sidebar");
+  const button = document.querySelector(".mobile-menu-btn");
+
+  if (!sidebar || !button) return;
+
+  const isOpen = sidebar.classList.toggle("is-open");
+  button.setAttribute("aria-expanded", String(isOpen));
+  button.innerHTML = isOpen
+    ? '<i class="bi bi-x-lg"></i><span>Đóng</span>'
+    : '<i class="bi bi-list"></i><span>Menu</span>';
+}
+
+function closeMobileMenu() {
+  const sidebar = document.getElementById("sidebar");
+  const button = document.querySelector(".mobile-menu-btn");
+
+  if (!sidebar || !button) return;
+
+  sidebar.classList.remove("is-open");
+  button.setAttribute("aria-expanded", "false");
+  button.innerHTML = '<i class="bi bi-list"></i><span>Menu</span>';
+}
+
+function bindMobileMenuEvents() {
+  const menuButton = document.querySelector(".mobile-menu-btn");
+
+  menuButton?.addEventListener("click", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    toggleMobileMenu();
+  });
+
+  document.addEventListener("click", (event) => {
+    const sidebar = document.getElementById("sidebar");
+
+    if (!sidebar || !sidebar.classList.contains("is-open")) return;
+    if (sidebar.contains(event.target)) return;
+
+    closeMobileMenu();
+  });
+
+  document.addEventListener("click", (event) => {
+    const link = event.target.closest("#sidebarNav .nav-link");
+    if (link && window.innerWidth <= 991) closeMobileMenu();
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 991) closeMobileMenu();
+  });
+}
+
 function logout() {
   window.location.href = "login.html";
 }
@@ -83,21 +180,34 @@ function renderDashboard() {
   const completedOrders = SAMPLE_DATA.orders.filter((order) =>
     ["COMPLETED", "PAID"].includes(order.status),
   );
-  const revenue = completedOrders.reduce((sum, order) => sum + Number(order.total), 0);
+  const revenue = completedOrders.reduce(
+    (sum, order) => sum + Number(order.total),
+    0,
+  );
   const todayRevenue = completedOrders
     .filter((order) => order.date.startsWith("2026-06-27"))
     .reduce((sum, order) => sum + Number(order.total), 0);
-  const lowStock = SAMPLE_DATA.products.filter((product) => Number(product.quantity) <= 10).length;
-  const activeMachines = SAMPLE_DATA.machines.filter((machine) => machine.status === "ACTIVE").length;
-  const recentOrders = SAMPLE_DATA.orders.slice().sort((a, b) => b.id - a.id).slice(0, 5);
+  const lowStock = SAMPLE_DATA.products.filter(
+    (product) => Number(product.quantity) <= 10,
+  ).length;
+  const activeMachines = SAMPLE_DATA.machines.filter(
+    (machine) => machine.status === "ACTIVE",
+  ).length;
+  const recentOrders = SAMPLE_DATA.orders
+    .slice()
+    .sort((a, b) => b.id - a.id)
+    .slice(0, 5);
 
-  setHtml("dashboardStats", `
+  setHtml(
+    "dashboardStats",
+    `
     ${statCard("bi-cash-coin", "Doanh thu hôm nay", formatMoney(todayRevenue))}
     ${statCard("bi-calendar2-month", "Doanh thu tháng", formatMoney(revenue))}
     ${statCard("bi-receipt-cutoff", "Tổng đơn hàng", formatNumber(SAMPLE_DATA.orders.length))}
     ${statCard("bi-box-seam", "Sản phẩm sắp hết", formatNumber(lowStock))}
     ${statCard("bi-hdd-network", "Máy đang Active", `${activeMachines}/${SAMPLE_DATA.machines.length}`)}
-  `);
+  `,
+  );
 
   renderTable("recentOrders", {
     columns: ["Mã đơn", "Ngày", "Tổng tiền", "Trạng thái"],
@@ -131,8 +241,18 @@ function renderProducts(products = SAMPLE_DATA.products) {
       formatMoney(product.price),
       getStatusBadge(product.status),
       actionButtons([
-        actionButton("Sửa", "bi-pencil", "primary", `editProduct(${product.id})`),
-        actionButton("Ngừng bán", "bi-trash", "danger", `deleteProduct(${product.id})`),
+        actionButton(
+          "Sửa",
+          "bi-pencil",
+          "primary",
+          `editProduct(${product.id})`,
+        ),
+        actionButton(
+          "Ngừng bán",
+          "bi-trash",
+          "danger",
+          `deleteProduct(${product.id})`,
+        ),
       ]),
     ]),
     emptyMessage: "Chưa có dữ liệu sản phẩm.",
@@ -145,9 +265,14 @@ function openProductModal(product = null) {
   setValue("productPrice", product?.price || "");
   setValue("productImage", product?.image || "");
   setValue("productStatus", product?.status || "AVAILABLE");
-  setText("productModalTitle", product ? "Cập nhật sản phẩm" : "Thêm sản phẩm mới");
+  setText(
+    "productModalTitle",
+    product ? "Cập nhật sản phẩm" : "Thêm sản phẩm mới",
+  );
 
-  bootstrap.Modal.getOrCreateInstance(document.getElementById("productModal")).show();
+  bootstrap.Modal.getOrCreateInstance(
+    document.getElementById("productModal"),
+  ).show();
 }
 
 function editProduct(id) {
@@ -171,7 +296,10 @@ function deleteProduct(id) {
   handlePendingApi("products.delete", { id });
 }
 
-function renderInventory(items = SAMPLE_DATA.products, logs = SAMPLE_DATA.inventoryLogs) {
+function renderInventory(
+  items = SAMPLE_DATA.products,
+  logs = SAMPLE_DATA.inventoryLogs,
+) {
   renderTable("inventoryTable", {
     columns: ["ID", "Sản phẩm", "Số lượng", "Trạng thái", "Thao tác"],
     rows: items.map((item) => [
@@ -180,8 +308,18 @@ function renderInventory(items = SAMPLE_DATA.products, logs = SAMPLE_DATA.invent
       formatNumber(item.quantity),
       getStatusBadge(item.status),
       actionButtons([
-        actionButton("Nhập", "bi-plus-circle", "success", `openInventoryModal('IMPORT', ${item.id})`),
-        actionButton("Điều chỉnh", "bi-sliders", "primary", `openInventoryModal('ADJUSTMENT', ${item.id})`),
+        actionButton(
+          "Nhập",
+          "bi-plus-circle",
+          "success",
+          `openInventoryModal('IMPORT', ${item.id})`,
+        ),
+        actionButton(
+          "Điều chỉnh",
+          "bi-sliders",
+          "primary",
+          `openInventoryModal('ADJUSTMENT', ${item.id})`,
+        ),
       ]),
     ]),
     emptyMessage: "Chưa có dữ liệu tồn kho.",
@@ -205,16 +343,24 @@ function openInventoryModal(type = "IMPORT", productId = "") {
 
   if (productSelect) {
     productSelect.innerHTML = SAMPLE_DATA.products
-      .map((product) => `<option value="${product.id}">${escapeHtml(product.name)}</option>`)
+      .map(
+        (product) =>
+          `<option value="${product.id}">${escapeHtml(product.name)}</option>`,
+      )
       .join("");
   }
 
   setValue("inventoryType", type);
   setValue("inventoryProductId", productId);
   setValue("inventoryQuantity", "");
-  setText("inventoryModalTitle", type === "IMPORT" ? "Nhập thêm sản phẩm" : "Điều chỉnh số lượng tồn kho");
+  setText(
+    "inventoryModalTitle",
+    type === "IMPORT" ? "Nhập thêm sản phẩm" : "Điều chỉnh số lượng tồn kho",
+  );
 
-  bootstrap.Modal.getOrCreateInstance(document.getElementById("inventoryModal")).show();
+  bootstrap.Modal.getOrCreateInstance(
+    document.getElementById("inventoryModal"),
+  ).show();
 }
 
 function submitInventoryForm() {
@@ -229,7 +375,14 @@ function submitInventoryForm() {
 
 function renderOrders(orders = SAMPLE_DATA.orders) {
   renderTable("ordersTable", {
-    columns: ["Mã đơn", "Ngày", "Tổng tiền", "Đơn hàng", "Thanh toán", "Thao tác"],
+    columns: [
+      "Mã đơn",
+      "Ngày",
+      "Tổng tiền",
+      "Đơn hàng",
+      "Thanh toán",
+      "Thao tác",
+    ],
     rows: orders.map((order) => [
       `#${escapeHtml(order.id)}`,
       escapeHtml(order.date),
@@ -237,8 +390,18 @@ function renderOrders(orders = SAMPLE_DATA.orders) {
       getStatusBadge(order.status),
       getStatusBadge(order.paymentStatus),
       actionButtons([
-        actionButton("Chi tiết", "bi-eye", "primary", `openOrderDetail(${order.id})`),
-        actionButton("Hủy", "bi-x-circle", "danger", `cancelOrder(${order.id})`),
+        actionButton(
+          "Chi tiết",
+          "bi-eye",
+          "primary",
+          `openOrderDetail(${order.id})`,
+        ),
+        actionButton(
+          "Hủy",
+          "bi-x-circle",
+          "danger",
+          `cancelOrder(${order.id})`,
+        ),
       ]),
     ]),
     emptyMessage: "Chưa có dữ liệu đơn hàng.",
@@ -249,17 +412,21 @@ function openOrderDetail(order = null) {
   const body = document.getElementById("orderDetailBody");
   if (!body) return;
 
-  const orderData = typeof order === "object"
-    ? order
-    : SAMPLE_DATA.orders.find((item) => item.id === Number(order));
+  const orderData =
+    typeof order === "object"
+      ? order
+      : SAMPLE_DATA.orders.find((item) => item.id === Number(order));
 
-  body.innerHTML = order && typeof order === "object"
-    ? renderOrderDetail(orderData)
-    : orderData
+  body.innerHTML =
+    order && typeof order === "object"
       ? renderOrderDetail(orderData)
-      : `<div class="empty-state">Chưa có dữ liệu chi tiết.</div>`;
+      : orderData
+        ? renderOrderDetail(orderData)
+        : `<div class="empty-state">Chưa có dữ liệu chi tiết.</div>`;
 
-  bootstrap.Modal.getOrCreateInstance(document.getElementById("orderDetailModal")).show();
+  bootstrap.Modal.getOrCreateInstance(
+    document.getElementById("orderDetailModal"),
+  ).show();
 }
 
 function cancelOrder(id) {
@@ -274,7 +441,9 @@ function renderUsers(users = SAMPLE_DATA.users) {
       escapeHtml(user.username),
       getStatusBadge(user.role),
       getStatusBadge(user.status),
-      actionButtons([actionButton("Sửa", "bi-pencil", "primary", `editUser(${user.id})`)]),
+      actionButtons([
+        actionButton("Sửa", "bi-pencil", "primary", `editUser(${user.id})`),
+      ]),
     ]),
     emptyMessage: "Chưa có dữ liệu tài khoản.",
   });
@@ -288,7 +457,9 @@ function openUserModal(user = null) {
   setValue("userStatus", user?.status || "ACTIVE");
   setText("userModalTitle", user ? "Cập nhật tài khoản" : "Tạo tài khoản mới");
 
-  bootstrap.Modal.getOrCreateInstance(document.getElementById("userModal")).show();
+  bootstrap.Modal.getOrCreateInstance(
+    document.getElementById("userModal"),
+  ).show();
 }
 
 function editUser(id) {
@@ -332,24 +503,37 @@ function renderReports() {
   const validOrders = SAMPLE_DATA.orders.filter((order) =>
     ["COMPLETED", "PAID"].includes(order.status),
   );
-  const totalRevenue = validOrders.reduce((sum, order) => sum + Number(order.total), 0);
+  const totalRevenue = validOrders.reduce(
+    (sum, order) => sum + Number(order.total),
+    0,
+  );
   const todayRevenue = validOrders
     .filter((order) => order.date.startsWith("2026-06-27"))
     .reduce((sum, order) => sum + Number(order.total), 0);
-  const completedOrders = SAMPLE_DATA.orders.filter((order) => order.status === "COMPLETED").length;
-  const pendingOrders = SAMPLE_DATA.orders.filter((order) => order.status === "PENDING").length;
+  const completedOrders = SAMPLE_DATA.orders.filter(
+    (order) => order.status === "COMPLETED",
+  ).length;
+  const pendingOrders = SAMPLE_DATA.orders.filter(
+    (order) => order.status === "PENDING",
+  ).length;
   const topProducts = buildTopProducts(SAMPLE_DATA.orders);
 
-  setHtml("reportStats", `
+  setHtml(
+    "reportStats",
+    `
     ${statCard("bi-cash", "Doanh thu ngày", formatMoney(todayRevenue))}
     ${statCard("bi-wallet2", "Doanh thu tháng", formatMoney(totalRevenue))}
     ${statCard("bi-check-circle", "Đơn hoàn tất", formatNumber(completedOrders))}
     ${statCard("bi-hourglass-split", "Đơn chờ xử lý", formatNumber(pendingOrders))}
-  `);
+  `,
+  );
 
-  setHtml("topProducts", topProducts.length
-    ? topProducts.map(renderTopProduct).join("")
-    : '<div class="empty-state">Chưa có dữ liệu sản phẩm bán chạy.</div>');
+  setHtml(
+    "topProducts",
+    topProducts.length
+      ? topProducts.map(renderTopProduct).join("")
+      : '<div class="empty-state">Chưa có dữ liệu sản phẩm bán chạy.</div>',
+  );
 
   renderTable("revenueTable", {
     columns: ["Mã đơn", "Ngày", "Trạng thái", "Doanh thu"],
@@ -401,12 +585,16 @@ function renderTopProduct(product, index) {
 }
 
 function renderTable(targetId, { columns, rows = [], emptyMessage }) {
-  const headerHtml = columns.map((column) => `<th>${escapeHtml(column)}</th>`).join("");
+  const headerHtml = columns
+    .map((column) => `<th>${escapeHtml(column)}</th>`)
+    .join("");
   const bodyHtml = rows.length
     ? rows.map((row) => renderTableRow(columns, row)).join("")
     : renderEmptyRow(columns.length, emptyMessage);
 
-  setHtml(targetId, `
+  setHtml(
+    targetId,
+    `
     <div class="table-responsive">
       <table class="table table-hover mb-0">
         <thead>
@@ -415,15 +603,20 @@ function renderTable(targetId, { columns, rows = [], emptyMessage }) {
         <tbody>${bodyHtml}</tbody>
       </table>
     </div>
-  `);
+  `,
+  );
 }
 
 function renderTableRow(columns, row) {
   return `
     <tr>
-      ${row.map((cell, index) => `
+      ${row
+        .map(
+          (cell, index) => `
         <td data-label="${escapeHtml(columns[index])}">${cell}</td>
-      `).join("")}
+      `,
+        )
+        .join("")}
     </tr>
   `;
 }
@@ -459,7 +652,8 @@ function machineStatusActions(machine) {
 }
 
 function machineStatusButton(machine, status, label, variant) {
-  const className = machine.status === status ? `btn-${variant}` : `btn-outline-${variant}`;
+  const className =
+    machine.status === status ? `btn-${variant}` : `btn-outline-${variant}`;
 
   return `
     <button class="btn ${className}" onclick="updateMachineStatus(${machine.id}, '${status}')">
@@ -475,14 +669,18 @@ function productNameCell(product) {
 }
 
 function renderOrderDetail(order) {
-  const itemRows = order.items.map((item) => `
+  const itemRows = order.items
+    .map(
+      (item) => `
     <tr>
       <td data-label="Sản phẩm">${escapeHtml(item.name)}</td>
       <td data-label="SL">${formatNumber(item.quantity)}</td>
       <td data-label="Giá">${formatMoney(item.price)}</td>
       <td data-label="Thành tiền">${formatMoney(item.price * item.quantity)}</td>
     </tr>
-  `).join("");
+  `,
+    )
+    .join("");
 
   return `
     <div class="row g-3 mb-3">

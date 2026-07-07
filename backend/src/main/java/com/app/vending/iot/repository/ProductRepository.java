@@ -10,7 +10,6 @@ public interface ProductRepository extends MongoRepository<Product, String> {
     boolean existsByName(String name);
 
     List<Product> findByStatus(ProductStatus status);
-    List<Product> findByMachineId(String machineId);
     List<Product>findByNameContainingIgnoreCase(String keyword);
 
 }

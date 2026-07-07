@@ -2,6 +2,8 @@ package com.app.vending.iot.controller;
 
 import com.app.vending.iot.common.ApiResponse;
 import com.app.vending.iot.common.enums.OrderStatus;
+import com.app.vending.iot.dto.request.CreateOrderRequest;
+import com.app.vending.iot.dto.response.OrderResponse;
 import com.app.vending.iot.entity.Order;
 import com.app.vending.iot.service.OrderService;
 import lombok.AccessLevel;
@@ -29,27 +31,42 @@ public class OrderController {
 
     // GUEST, STAFF, ADMIN
     @GetMapping("/{id}")
-    public ApiResponse<Order> getById(@PathVariable String id) {
-        return ApiResponse.<Order>builder()
-                .result(orderService.getById(id))
+    public ApiResponse<OrderResponse> getOrder(@PathVariable String id) {
+        return ApiResponse.<OrderResponse>builder()
+                .result(orderService.getOrder(id))
+                .build();
+    }
+
+    @GetMapping("/{id}/status")
+    public ApiResponse<String> getStatus(@PathVariable String id) {
+        return ApiResponse.<String>builder()
+                .result(orderService.getStatus(id))
                 .build();
     }
 
     // GUEST
     @PostMapping
-    public ApiResponse<Order> create(@RequestBody Order order) {
-        return ApiResponse.<Order>builder()
+    public ApiResponse<String> create(@RequestBody CreateOrderRequest request) {
+        return ApiResponse.<String>builder()
                 .message("Tạo đơn hàng thành công")
-                .result(orderService.create(order))
+                .result(orderService.create(request))
                 .build();
     }
 
     // STAFF
-    @PutMapping("/{id}/status/{status}")
-    public ApiResponse<Order> updateStatus(@PathVariable String id, @PathVariable OrderStatus status) {
+    @PutMapping("/pending/{id}/status/{status}")
+    public ApiResponse<Order> handlePending(@PathVariable String id, @PathVariable OrderStatus status) {
         return ApiResponse.<Order>builder()
-                .message("Thay đổi trạng thái đơn hàng thành công")
-                .result(orderService.updateStatus(id,status))
+                .message("Xử lí đơn hàng thành công")
+                .result(orderService.handlePending(id,status))
+                .build();
+    }
+
+    @PutMapping("/completed/{id}")
+    public ApiResponse<Order> completed(@PathVariable String id) {
+        return ApiResponse.<Order>builder()
+                .message("Hoàn thành đơn hàng")
+                .result(orderService.completed(id))
                 .build();
     }
 }

@@ -8,6 +8,12 @@ import org.springframework.http.HttpStatusCode;
 @Getter
 @AllArgsConstructor
 public enum ErrorCode {
+    ORDER_NOT_UPDATE_COMPLETED(3015, "Đơn hàng đã hoàn thành không thể cập nhật", HttpStatus.BAD_REQUEST),
+    PRODUCT_NOT_AVAILABLE(3014, "Sản phẩm không có sẳn", HttpStatus.BAD_REQUEST),
+    ORDER_NOT_PAID(3013, "Đơn hàng chưa thanh toán", HttpStatus.BAD_REQUEST),
+    ORDER_NOT_PENDING(3012, "Đơn hàng không nằm trong quá trình đợi", HttpStatus.BAD_REQUEST),
+    ORDER_CANCELLED(3012, "Đơn hàng đã hủy (CANCELLED) không thể cập nhật", HttpStatus.BAD_REQUEST),
+    ORDER_NOT_UPDATE_PENDING(3011, "Không thể cập nhật đơn hàng sang quá trình đợi (PENDING)", HttpStatus.BAD_REQUEST),
     ORDER_EMPTY(3010, "Đơn hàng phải có ít nhất một sản phẩm", HttpStatus.BAD_REQUEST),
     PRODUCT_OUT_OF_STOCK(3009, "Sản phẩm không đủ số lượng trong kho", HttpStatus.BAD_REQUEST),
     PAYMENT_NOT_FOUND(3008, "Không tìm thấy thanh toán", HttpStatus.NOT_FOUND),

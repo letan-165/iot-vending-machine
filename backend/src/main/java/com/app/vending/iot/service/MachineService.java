@@ -4,8 +4,12 @@ import com.app.vending.iot.common.enums.ProductLogType;
 import com.app.vending.iot.common.exception.AppException;
 import com.app.vending.iot.common.exception.ErrorCode;
 import com.app.vending.iot.dto.ProductMachine;
+import com.app.vending.iot.dto.response.MachineResponse;
+import com.app.vending.iot.dto.response.ProductDetailResponse;
 import com.app.vending.iot.entity.Machine;
+import com.app.vending.iot.entity.Product;
 import com.app.vending.iot.mapper.MachineMapper;
+import com.app.vending.iot.mapper.ProductMapper;
 import com.app.vending.iot.repository.MachineRepository;
 import com.app.vending.iot.repository.ProductRepository;
 import lombok.AccessLevel;
@@ -27,6 +31,7 @@ public class MachineService {
     MachineRepository machineRepository;
     ProductRepository productRepository;
     MachineMapper machineMapper;
+    ProductMapper productMapper;
     MachineLogService machineLogService;
 
     // STAFF, ADMIN
@@ -37,6 +42,33 @@ public class MachineService {
     // ADMIN
     public Machine create(Machine machine) {
         return machineRepository.save(machine);
+    }
+
+    // GUEST
+    public MachineResponse getMachine(String id) {
+        Machine machine = machineRepository.findById(id)
+                .orElseThrow(() -> new AppException(ErrorCode.MACHINE_NOT_FOUND));
+        var productMachineIds = machine.getProducts().stream()
+                .map(ProductMachine::getProductId)
+                .toList();
+
+        var products = productRepository.findAllById(productMachineIds);
+        Map<String, Product> productMap = products.stream()
+                .collect(Collectors.toMap(
+                        Product::getId,
+                        Function.identity()
+                ));
+
+        MachineResponse machineResponse = machineMapper.toMachineResponse(machine);
+
+        for (var productMachine : machine.getProducts()) {
+            Product product = productMap.get(productMachine.getProductId());
+            ProductDetailResponse response = productMapper.toProductDetailResponse(product);
+            response.setQuantity(productMachine.getQuantity());
+            machineResponse.getProducts().add(response);
+        }
+
+        return machineResponse;
     }
 
     // ADMIN

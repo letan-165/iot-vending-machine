@@ -35,7 +35,10 @@ public class MachineLogService {
     // STAFF, ADMIN
     public MachineLog updateProduct(String id,List<ProductMachine> products, ProductLogType type) {
         MachineLog machineLog = machineLogRepository.findById(id)
-                .orElseThrow(() -> new AppException(ErrorCode.INVENTORY_LOG_NOT_FOUND));
+                .orElseGet(() -> machineLogRepository.save(
+                        MachineLog.builder()
+                                .machineId(id)
+                                .build()));
 
         for (var product : products) {
             machineLog.getProducts().add(ProductLog.builder()

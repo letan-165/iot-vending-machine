@@ -27,5 +27,5 @@ public class Order {
     LocalDateTime date;
     Double total;
     OrderStatus status;
-
+    LocalDateTime datePay;
 }

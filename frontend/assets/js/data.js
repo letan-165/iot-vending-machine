@@ -1,8 +1,26 @@
 const SAMPLE_DATA = {
   users: [
-    { id: 1, username: "admin", password: "123456", role: "ADMIN", status: "ACTIVE" },
-    { id: 2, username: "staff01", password: "123456", role: "STAFF", status: "ACTIVE" },
-    { id: 3, username: "staff02", password: "123456", role: "STAFF", status: "LOCKED" },
+    {
+      id: 1,
+      username: "admin",
+      password: "123456",
+      role: "ADMIN",
+      status: "ACTIVE",
+    },
+    {
+      id: 2,
+      username: "staff01",
+      password: "123456",
+      role: "STAFF",
+      status: "ACTIVE",
+    },
+    {
+      id: 3,
+      username: "staff02",
+      password: "123456",
+      role: "STAFF",
+      status: "LOCKED",
+    },
   ],
   products: [
     {
@@ -48,7 +66,12 @@ const SAMPLE_DATA = {
   ],
   machines: [
     { id: 1, name: "VM-HCM-01", location: "Khu A - Tầng 1", status: "ACTIVE" },
-    { id: 2, name: "VM-HCM-02", location: "Khu B - Tầng 2", status: "MAINTENANCE" },
+    {
+      id: 2,
+      name: "VM-HCM-02",
+      location: "Khu B - Tầng 2",
+      status: "MAINTENANCE",
+    },
     { id: 3, name: "VM-HCM-03", location: "Sảnh chính", status: "OFFLINE" },
   ],
   orders: [
@@ -92,19 +115,31 @@ const SAMPLE_DATA = {
     },
   ],
   inventoryLogs: [
-    { id: 1, productId: 1, productName: "Coca Cola", quantity: 30, type: "IMPORT", date: "2026-06-27 08:00" },
-    { id: 2, productId: 2, productName: "Pepsi", quantity: 20, type: "IMPORT", date: "2026-06-27 08:05" },
-    { id: 3, productId: 4, productName: "Aquafina", quantity: -2, type: "ADJUSTMENT", date: "2026-06-27 13:20" },
+    {
+      id: 1,
+      productId: 1,
+      productName: "Coca Cola",
+      quantity: 30,
+      type: "IMPORT",
+      date: "2026-06-27 08:00",
+    },
+    {
+      id: 2,
+      productId: 2,
+      productName: "Pepsi",
+      quantity: 20,
+      type: "IMPORT",
+      date: "2026-06-27 08:05",
+    },
+    {
+      id: 3,
+      productId: 4,
+      productName: "Aquafina",
+      quantity: -2,
+      type: "ADJUSTMENT",
+      date: "2026-06-27 13:20",
+    },
   ],
-  hardware: {
-    arduino: "CONNECTED",
-    servo: "OK",
-    door: "CLOSED",
-    temperature: 28,
-    stockSensor: "NORMAL",
-    error: "NONE",
-    lastSync: "2026-06-27 14:30",
-  },
 };
 
 const statusVariants = {
@@ -157,11 +192,15 @@ function safeImage(url) {
 }
 
 function escapeHtml(value) {
-  return String(value ?? "").replace(/[&<>'"]/g, (char) => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    "'": "&#039;",
-    '"': "&quot;",
-  })[char]);
+  return String(value ?? "").replace(
+    /[&<>'"]/g,
+    (char) =>
+      ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "'": "&#039;",
+        '"': "&quot;",
+      })[char],
+  );
 }

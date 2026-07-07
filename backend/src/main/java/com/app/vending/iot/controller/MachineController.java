@@ -1,6 +1,7 @@
 package com.app.vending.iot.controller;
 
 import com.app.vending.iot.common.ApiResponse;
+import com.app.vending.iot.dto.response.MachineResponse;
 import com.app.vending.iot.entity.Machine;
 import com.app.vending.iot.service.MachineService;
 import lombok.AccessLevel;
@@ -23,6 +24,15 @@ public class MachineController {
     public ApiResponse<List<Machine>> getAll() {
         return ApiResponse.<List<Machine>>builder()
                 .result(machineService.getAll())
+                .build();
+    }
+
+    // ADMIN
+    @GetMapping("/{id}")
+    public ApiResponse<MachineResponse> getMachine(@PathVariable String id) {
+        return ApiResponse.<MachineResponse>builder()
+                .message("Lấy thông tin chi tiết máy bán nước thành công")
+                .result(machineService.getMachine(id))
                 .build();
     }
 

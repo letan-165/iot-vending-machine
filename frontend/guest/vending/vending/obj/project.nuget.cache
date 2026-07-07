@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "3ypfw8K/dhg=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\letan\\Documents\\a_School\\IOT\\btl\\vending\\vending\\vending.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\letan\\.nuget\\packages\\qrcoder\\1.8.0\\qrcoder.1.8.0.nupkg.sha512"
+  ],
+  "logs": []
+}

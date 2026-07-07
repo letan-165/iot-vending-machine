@@ -16,7 +16,6 @@ public class Product {
 
     @Id
     String id;
-    String machineId;
     String name;
     Double price;
     String image;
