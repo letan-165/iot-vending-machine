@@ -14,12 +14,6 @@ const navItems = [
     label: "Sản phẩm",
   },
   {
-    href: "inventory.html",
-    page: "inventory",
-    icon: "bi-box-seam",
-    label: "Tồn kho",
-  },
-  {
     href: "orders.html",
     page: "orders",
     icon: "bi-receipt",
@@ -487,7 +481,7 @@ function renderMachines(machines = SAMPLE_DATA.machines) {
       escapeHtml(machine.name),
       escapeHtml(machine.location),
       `<a class="btn btn-sm btn-outline-primary" href="inventory.html">
-        <i class="bi bi-box-seam me-1"></i> Tồn kho
+        <i class="bi bi-box-seam me-1"></i> Hiện có: 6
       </a>`,
       machineStatusActions(machine),
     ]),

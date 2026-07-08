@@ -2,7 +2,9 @@ package com.app.vending.iot.service;
 
 import com.app.vending.iot.common.exception.AppException;
 import com.app.vending.iot.common.exception.ErrorCode;
+import com.app.vending.iot.dto.request.LoginRequest;
 import com.app.vending.iot.dto.request.TokenRequest;
+import com.app.vending.iot.dto.response.LoginResponse;
 import com.app.vending.iot.entity.User;
 import com.app.vending.iot.repository.UserRepository;
 import com.nimbusds.jose.*;
@@ -16,6 +18,7 @@ import lombok.experimental.FieldDefaults;
 import lombok.experimental.NonFinal;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;

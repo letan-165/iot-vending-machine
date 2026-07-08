@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatusCode;
 @Getter
 @AllArgsConstructor
 public enum ErrorCode {
+    LOG_NOT_IMPORT(3017, "Trạng thái log không phải nhập hàng", HttpStatus.BAD_REQUEST),
+    REQUEST_TYPE_SALE(3016, "Sản phẩm đầu vào chỉ có thể nhập hoặc điều chỉnh", HttpStatus.BAD_REQUEST),
     ORDER_NOT_UPDATE_COMPLETED(3015, "Đơn hàng đã hoàn thành không thể cập nhật", HttpStatus.BAD_REQUEST),
     PRODUCT_NOT_AVAILABLE(3014, "Sản phẩm không có sẳn", HttpStatus.BAD_REQUEST),
     ORDER_NOT_PAID(3013, "Đơn hàng chưa thanh toán", HttpStatus.BAD_REQUEST),

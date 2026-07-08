@@ -42,8 +42,8 @@ public class UserService {
                 .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
 
         user = user.toBuilder()
-                .username(request.getUsername())
-                .password(request.getPassword())
+                .fullName(request.getFullName())
+                .email(request.getEmail())
                 .role(request.getRole())
                 .build();
 
@@ -75,7 +75,6 @@ public class UserService {
 
         return LoginResponse.builder()
                 .userID(user.getId())
-                .fullName(user.getFullName())
                 .token(authService.generate(user))
                 .build();
     }

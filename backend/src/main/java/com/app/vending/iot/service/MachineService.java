@@ -3,6 +3,7 @@ package com.app.vending.iot.service;
 import com.app.vending.iot.common.enums.ProductLogType;
 import com.app.vending.iot.common.exception.AppException;
 import com.app.vending.iot.common.exception.ErrorCode;
+import com.app.vending.iot.dto.ProductLog;
 import com.app.vending.iot.dto.ProductMachine;
 import com.app.vending.iot.dto.response.MachineResponse;
 import com.app.vending.iot.dto.response.ProductDetailResponse;
@@ -40,8 +41,10 @@ public class MachineService {
     }
 
     // ADMIN
-    public Machine create(Machine machine) {
-        return machineRepository.save(machine);
+    public Machine create(Machine request) {
+        Machine machine = machineRepository.save(request);
+        machineLogService.create(machine.getId());
+        return machine;
     }
 
     // GUEST
@@ -77,31 +80,6 @@ public class MachineService {
                 .orElseThrow(() -> new AppException(ErrorCode.MACHINE_NOT_FOUND));
 
         machineMapper.updateMachine(request, machine);
-
-        if(request.getProducts() != null) {
-            Map<String, ProductMachine> productMap = machine.getProducts()
-                    .stream()
-                    .collect(Collectors.toMap(
-                            ProductMachine::getProductId,
-                            Function.identity()
-                    ));
-
-            for (ProductMachine product : request.getProducts()) {
-                if (!productRepository.existsById(product.getProductId()))
-                    throw new AppException(ErrorCode.PRODUCT_NOT_FOUND);
-
-                ProductMachine current = productMap.get(product.getProductId());
-
-                if (current != null) {
-                    current.setQuantity(product.getQuantity());
-                } else {
-                    machine.getProducts().add(product);
-                }
-            }
-
-            machineLogService.updateProduct(machine.getId(), request.getProducts(), ProductLogType.ADJUSTMENT);
-        }
-
         return machineRepository.save(machine);
     }
 
@@ -114,7 +92,7 @@ public class MachineService {
     }
 
     // ADMIN, STAFF
-    public Machine importProduct(String id, List<ProductMachine> request) {
+    public Machine updateProduct(String id, List<ProductLog> request) {
         Machine machine = machineRepository.findById(id)
                 .orElseThrow(() -> new AppException(ErrorCode.MACHINE_NOT_FOUND));
 
@@ -125,21 +103,35 @@ public class MachineService {
                         Function.identity()
                 ));
 
-        for (ProductMachine product : request) {
-            if (!productRepository.existsById(product.getProductId()))
+        for (ProductLog product : request) {
+            if (!productRepository.existsById(product.getId()))
                 throw new AppException(ErrorCode.PRODUCT_NOT_FOUND);
 
-            ProductMachine current = productMap.get(product.getProductId());
+            ProductMachine current = productMap.get(product.getId());
 
-            if (current != null) {
-                current.setQuantity(product.getQuantity() + current.getQuantity());
-            } else {
-                machine.getProducts().add(product);
+            if (current == null) {
+                if (product.getType() != ProductLogType.IMPORT)
+                    throw new AppException(ErrorCode.REQUEST_TYPE_SALE);
+
+                machine.getProducts().add(ProductMachine.builder()
+                                .productId(product.getId())
+                                .quantity(product.getQuantity())
+                        .build());
+                continue;
+            }
+
+            switch (product.getType()) {
+                case SALE -> throw new AppException(ErrorCode.REQUEST_TYPE_SALE);
+                case IMPORT -> current.setQuantity(current.getQuantity() + product.getQuantity());
+                case ADJUSTMENT -> current.setQuantity(product.getQuantity());
+                case OUTPORT -> machine.getProducts().removeIf(p -> p.getProductId().equals(product.getId()));
             }
         }
 
-        machineLogService.updateProduct(machine.getId(), request, ProductLogType.IMPORT);
+        machineLogService.updateProduct(machine.getId(), request);
         return machineRepository.save(machine);
     }
+
+
 
 }

@@ -1,6 +1,7 @@
 package com.app.vending.iot.controller;
 
 import com.app.vending.iot.common.ApiResponse;
+import com.app.vending.iot.dto.ProductLog;
 import com.app.vending.iot.dto.response.MachineResponse;
 import com.app.vending.iot.entity.Machine;
 import com.app.vending.iot.service.MachineService;
@@ -50,7 +51,7 @@ public class MachineController {
     public ApiResponse<Machine> update(@PathVariable String id,
                                        @RequestBody Machine machine) {
         return ApiResponse.<Machine>builder()
-                .message("Cập nhật máy bán nước thành công")
+                .message("Cập nhật thông tin máy bán nước thành công")
                 .result(machineService.update(id, machine))
                 .build();
     }
@@ -63,6 +64,15 @@ public class MachineController {
 
         return ApiResponse.<Void>builder()
                 .message("Xóa máy bán nước thành công")
+                .build();
+    }
+
+    @PutMapping("/{id}/product")
+    public ApiResponse<Machine> updateProduct(@PathVariable String id,
+                                              @RequestBody List<ProductLog> productLogs) {
+        return ApiResponse.<Machine>builder()
+                .message("Cập nhật sản phẩm máy bán nước thành công")
+                .result(machineService.updateProduct(id, productLogs))
                 .build();
     }
 }

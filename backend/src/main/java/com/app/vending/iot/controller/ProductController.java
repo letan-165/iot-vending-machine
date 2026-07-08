@@ -1,6 +1,7 @@
 package com.app.vending.iot.controller;
 
 import com.app.vending.iot.common.ApiResponse;
+import com.app.vending.iot.dto.request.ProductRequest;
 import com.app.vending.iot.entity.Product;
 import com.app.vending.iot.service.ProductService;
 import lombok.AccessLevel;
@@ -27,30 +28,20 @@ public class ProductController {
 
     // ADMIN
     @PostMapping
-    public ApiResponse<Product> create(@RequestBody Product product) {
+    public ApiResponse<Product> create(@RequestBody ProductRequest request) {
         return ApiResponse.<Product>builder()
                 .message("Thêm sản phẩm thành công")
-                .result(productService.create(product))
+                .result(productService.create(request))
                 .build();
     }
 
     // ADMIN
     @PutMapping("/{id}")
     public ApiResponse<Product> update(@PathVariable String id,
-                                       @RequestBody Product product) {
+                                       @RequestBody ProductRequest request) {
         return ApiResponse.<Product>builder()
                 .message("Cập nhật sản phẩm thành công")
-                .result(productService.update(id, product))
-                .build();
-    }
-
-    // ADMIN
-    @DeleteMapping("/{id}")
-    public ApiResponse<Void> delete(@PathVariable String id) {
-        productService.delete(id);
-
-        return ApiResponse.<Void>builder()
-                .message("Xóa sản phẩm thành công")
+                .result(productService.update(id, request))
                 .build();
     }
 }

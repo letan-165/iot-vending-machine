@@ -1,7 +1,10 @@
 package com.app.vending.iot.controller;
 
+import com.app.vending.iot.dto.request.LoginRequest;
+import com.app.vending.iot.dto.response.LoginResponse;
 import com.app.vending.iot.entity.User;
 import com.app.vending.iot.service.UserService;
+import com.nimbusds.jose.JOSEException;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -51,9 +54,17 @@ public class UserController {
     @DeleteMapping("/{id}")
     public ApiResponse<Void> delete(@PathVariable String id) {
         userService.delete(id);
-
         return ApiResponse.<Void>builder()
                 .message("Xóa người dùng thành công")
+                .build();
+    }
+
+    // ADMIN
+    @PostMapping("/login")
+    public ApiResponse<LoginResponse> login(@RequestBody LoginRequest request) throws JOSEException {
+        return ApiResponse.<LoginResponse>builder()
+                .message("Đăng nhập thành công")
+                .result(userService.login(request))
                 .build();
     }
 }

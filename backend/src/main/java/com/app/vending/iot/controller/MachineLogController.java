@@ -1,6 +1,7 @@
 package com.app.vending.iot.controller;
 
 import com.app.vending.iot.common.ApiResponse;
+import com.app.vending.iot.dto.response.MachineLogResponse;
 import com.app.vending.iot.entity.MachineLog;
 import com.app.vending.iot.service.MachineLogService;
 import lombok.AccessLevel;
@@ -16,10 +17,10 @@ public class MachineLogController {
     MachineLogService machineLogService;
 
     // STAFF, ADMIN
-    @GetMapping("/{id}")
-    public ApiResponse<MachineLog> getById(@PathVariable String id) {
-        return ApiResponse.<MachineLog>builder()
-                .result(machineLogService.getById(id))
+    @GetMapping("/{machineId}")
+    public ApiResponse<MachineLogResponse> getMachineLog(@PathVariable String machineId) {
+        return ApiResponse.<MachineLogResponse>builder()
+                .result(machineLogService.getMachineLog(machineId))
                 .build();
     }
 

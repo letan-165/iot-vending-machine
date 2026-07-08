@@ -5,6 +5,7 @@ import com.app.vending.iot.common.enums.ProductLogType;
 import com.app.vending.iot.common.enums.ProductStatus;
 import com.app.vending.iot.common.exception.AppException;
 import com.app.vending.iot.common.exception.ErrorCode;
+import com.app.vending.iot.dto.ProductLog;
 import com.app.vending.iot.dto.ProductMachine;
 import com.app.vending.iot.dto.ProductOrder;
 import com.app.vending.iot.dto.request.CreateOrderRequest;
@@ -108,9 +109,6 @@ public class OrderService {
             Product product = productRepository.findById(item.getProductId())
                     .orElseThrow(() -> new AppException(ErrorCode.PRODUCT_NOT_FOUND));
 
-            if (!product.getStatus().equals(ProductStatus.AVAILABLE))
-                throw new AppException(ErrorCode.PRODUCT_NOT_AVAILABLE);
-
             ProductMachine current = productMap.get(item.getProductId());
             if (current.getQuantity() < item.getQuantity())
                 throw new AppException(ErrorCode.PRODUCT_OUT_OF_STOCK);
@@ -186,17 +184,18 @@ public class OrderService {
             current.setQuantity(current.getQuantity() - item.getQuantity());
         }
 
-        List<ProductMachine> productMachines = order.getProducts()
+        List<ProductLog> productLogs = order.getProducts()
                 .stream()
                 .map(p -> {
-                    ProductMachine pm = new ProductMachine();
-                    pm.setProductId(p.getProductId());
-                    pm.setQuantity(p.getQuantity());
-                    return pm;
+                    return ProductLog.builder()
+                            .id(p.getProductId())
+                            .quantity(p.getQuantity())
+                            .type(ProductLogType.SALE)
+                            .build();
                 })
                 .toList();
 
-        machineLogService.updateProduct(order.getMachineId(), productMachines, ProductLogType.SALE);
+        machineLogService.updateProduct(order.getMachineId(), productLogs);
         machineRepository.save(machine);
 
         order.setStatus(OrderStatus.COMPLETED);

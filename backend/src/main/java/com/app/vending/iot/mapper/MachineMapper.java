@@ -13,6 +13,4 @@ public interface MachineMapper {
 
     @Mapping(source = "products",target = "products", ignore = true)
     MachineResponse toMachineResponse(Machine machine);
-
-
 }

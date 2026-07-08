@@ -1,4 +1,4 @@
-package com.app.vending.iot.dto;
+package com.app.vending.iot.dto.response;
 
 import com.app.vending.iot.common.enums.ProductLogType;
 import lombok.*;
@@ -11,8 +11,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ProductLog {
+public class ProductLogResponse {
     String id;
+    String name;
     Integer quantity;
     ProductLogType type;
     LocalDateTime date;

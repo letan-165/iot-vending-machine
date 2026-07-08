@@ -2,7 +2,9 @@ package com.app.vending.iot.service;
 
 import com.app.vending.iot.common.exception.AppException;
 import com.app.vending.iot.common.exception.ErrorCode;
+import com.app.vending.iot.dto.request.ProductRequest;
 import com.app.vending.iot.entity.Product;
+import com.app.vending.iot.mapper.ProductMapper;
 import com.app.vending.iot.repository.ProductRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +21,7 @@ import java.util.List;
 public class ProductService {
 
     ProductRepository productRepository;
+    ProductMapper productMapper;
 
     // GUEST, STAFF, ADMIN
     public List<Product> getAll() {
@@ -26,38 +29,23 @@ public class ProductService {
     }
 
     // ADMIN
-    public Product create(Product product) {
+    public Product create(ProductRequest request) {
 
-        if (productRepository.existsByName(product.getName()))
+        if (productRepository.existsByName(request.getName()))
             throw new AppException(ErrorCode.PRODUCT_EXISTS);
 
-        return productRepository.save(product);
+        return productRepository.save(productMapper.toProduct(request));
     }
 
     // ADMIN
-    public Product update(String id, Product request) {
+    public Product update(String id, ProductRequest request) {
 
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new AppException(ErrorCode.PRODUCT_NOT_FOUND));
 
-        product = product.toBuilder()
-                .name(request.getName())
-                .price(request.getPrice())
-                .image(request.getImage())
-                .status(request.getStatus())
-                .build();
+        productMapper.updateProduct(request, product);
 
         return productRepository.save(product);
     }
-
-    // ADMIN
-    public void delete(String id) {
-
-        if(productRepository.existsById(id))
-            throw new  AppException(ErrorCode.PRODUCT_NOT_FOUND);
-
-        productRepository.deleteById(id);
-    }
-
 
 }
