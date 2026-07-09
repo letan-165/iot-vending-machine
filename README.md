@@ -5,3 +5,5 @@
 ## docs: https://1drv.ms/w/c/1d7eb7d3d658e011/IQBj3e-m1WG7S4EA1b7ZXdagAUlqVchr86UJRMuoD-PSF5M?e=xleWGC
 
 ## word: https://1drv.ms/w/c/8c38ac15479b7ff7/IQB2gZxwO8euTb10qWYKWnT6AafZkRBLa9FusLYxBgUomTY?e=t7BJkr
+
+## Powerpoint: https://1drv.ms/p/c/8c38ac15479b7ff7/IQBiXmNYrhOmTJI6XzCD9y9CAWhpDA1YT31HmOvj0-ZEhys?e=gWJUG4
