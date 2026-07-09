@@ -27,7 +27,7 @@ loginForm?.addEventListener("submit", async (event) => {
 
     window.location.href = "dashboard.html";
   } catch (error) {
-    showLoginAlert(error.message || "Khong the ket noi den may chu.");
+    showLoginAlert(error.message || "Không thể kết nối đến máy chủ.");
   } finally {
     setLoginLoading(false);
   }
@@ -46,6 +46,6 @@ function hideLoginAlert() {
 function setLoginLoading(isLoading) {
   loginButton.disabled = isLoading;
   loginButton.innerHTML = isLoading
-    ? '<span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>Dang dang nhap...'
-    : '<i class="bi bi-box-arrow-in-right me-1"></i> Dang nhap';
+    ? '<span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>Đang đăng nhập...'
+    : '<i class="bi bi-box-arrow-in-right me-1"></i> Đăng nhập';
 }
