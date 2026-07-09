@@ -1,8 +1,7 @@
 import { getAuthToken } from "../js/shared/session.js";
 
 // const API_BASE_URL = "http://localhost:8080/api";
-const API_BASE_URL =
-  "https://p01--iot-vending-machine--9w4j25rlpvhz.code.run/api";
+const API_BASE_URL = "https://iot-vending-machine.onrender.com/api";
 
 export async function request(path, options = {}) {
   const { method = "GET", headers = {}, body, includeAuth = true } = options;
