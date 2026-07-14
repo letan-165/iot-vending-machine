@@ -52,6 +52,9 @@ async function submitStatus(status) {
 
   try {
     await updateOrderStatusPublic(orderId, status);
+    window.location.href = `payment-result.html?status=${encodeURIComponent(
+      status,
+    )}&orderId=${encodeURIComponent(orderId)}`;
   } catch (error) {
     showAlert(error.message || "Không thể cập nhật trạng thái thanh toán.");
   } finally {
