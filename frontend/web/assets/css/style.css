@@ -31,6 +31,82 @@ body {
     linear-gradient(135deg, #0f172a 0%, #1e3a8a 52%, #2563eb 100%);
 }
 
+.payment-body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background:
+    radial-gradient(circle at top left, rgba(37, 99, 235, 0.18), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(14, 165, 233, 0.18), transparent 24%),
+    linear-gradient(135deg, #0f172a 0%, #1e3a8a 52%, #2563eb 100%);
+}
+
+.payment-shell {
+  width: min(760px, 100%);
+}
+
+.payment-card {
+  border: 0;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 28px 80px rgba(15, 23, 42, 0.3);
+}
+
+.payment-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.payment-logo {
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  border-radius: 18px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #2563eb, #0ea5e9);
+  font-size: 26px;
+  flex: 0 0 auto;
+}
+
+.payment-kicker {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.payment-summary {
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+}
+
+.payment-info-box {
+  height: 100%;
+  padding: 14px 16px;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: #ffffff;
+}
+
+.payment-actions .btn {
+  min-height: 52px;
+  border-radius: 16px;
+  font-weight: 800;
+}
+
+.payment-amount-text {
+  font-size: clamp(22px, 4vw, 34px);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
 .login-card {
   width: min(440px, calc(100vw - 32px));
   border: 0;
@@ -165,6 +241,154 @@ body {
   box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
 }
 
+.order-hero {
+  overflow: hidden;
+  border: 0;
+  background:
+    radial-gradient(circle at top right, rgba(56, 189, 248, 0.28), transparent 28%),
+    linear-gradient(135deg, #0f172a 0%, #1d4ed8 54%, #0ea5e9 100%);
+  color: #ffffff;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.16);
+}
+
+.order-hero .panel-body {
+  padding: 28px;
+}
+
+.order-hero-copy {
+  max-width: 760px;
+}
+
+.order-hero-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.order-hero-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  width: min(420px, 100%);
+}
+
+.order-hero-metric {
+  min-width: 0;
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+}
+
+.order-hero-metric span {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.order-hero-metric strong {
+  display: block;
+  font-size: 24px;
+  font-weight: 850;
+  line-height: 1.1;
+}
+
+.page-hero {
+  overflow: hidden;
+  border: 0;
+  color: #ffffff;
+  background:
+    radial-gradient(circle at top right, rgba(56, 189, 248, 0.22), transparent 28%),
+    linear-gradient(135deg, #0f172a 0%, #1e3a8a 55%, #2563eb 100%);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.16);
+}
+
+.page-hero .panel-body {
+  padding: 24px 24px 22px;
+}
+
+.page-hero-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.mini-metric {
+  min-width: 0;
+  padding: 14px 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.mini-metric span {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.mini-metric strong {
+  display: block;
+  font-size: 18px;
+  font-weight: 850;
+  line-height: 1.1;
+}
+
+.order-stat-card {
+  background:
+    linear-gradient(180deg, #ffffff 0%, #ffffff 100%);
+}
+
+.status-breakdown,
+.machine-breakdown {
+  display: grid;
+  gap: 14px;
+}
+
+.status-row,
+.machine-rank {
+  padding: 16px;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+}
+
+.status-row-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.status-progress {
+  height: 10px;
+  border-radius: 999px;
+  background: #e2e8f0;
+}
+
+.status-progress .progress-bar {
+  border-radius: 999px;
+}
+
 .stat-icon {
   width: 46px;
   height: 46px;
@@ -253,6 +477,10 @@ body {
 
 .hardware-card .badge {
   font-size: 0.95rem;
+}
+
+.w-sm-auto {
+  width: 100%;
 }
 
 /* ========== TABLET + MOBILE NAV (<= 991px) ========== */
@@ -476,6 +704,40 @@ body {
     font-size: 14px;
   }
 
+  .payment-body {
+    padding: 12px;
+  }
+
+  .payment-card {
+    border-radius: 22px;
+  }
+
+  .payment-brand {
+    align-items: flex-start;
+  }
+
+  .payment-logo {
+    width: 48px;
+    height: 48px;
+    border-radius: 16px;
+    font-size: 22px;
+  }
+
+  .payment-summary {
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  .payment-info-box {
+    padding: 12px 14px;
+    border-radius: 16px;
+  }
+
+  .payment-actions .btn {
+    min-height: 48px;
+    border-radius: 14px;
+  }
+
   .sidebar {
     padding: 10px 12px;
   }
@@ -565,6 +827,42 @@ body {
   .stat-value {
     margin-top: 2px;
     font-size: 21px;
+  }
+
+  .order-hero .panel-body {
+    padding: 18px;
+  }
+
+  .order-hero-metrics {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .order-hero-metric strong {
+    font-size: 22px;
+  }
+
+  .page-hero .panel-body {
+    padding: 18px;
+  }
+
+  .page-hero-kicker {
+    margin-bottom: 8px;
+  }
+
+  .mini-metric {
+    padding: 12px 14px;
+    border-radius: 16px;
+  }
+
+  .mini-metric strong {
+    font-size: 16px;
+  }
+
+  .status-row,
+  .machine-rank {
+    padding: 14px;
+    border-radius: 16px;
   }
 
   .table {
@@ -661,6 +959,12 @@ body {
   .modal-footer {
     padding-left: 14px;
     padding-right: 14px;
+  }
+}
+
+@media (min-width: 576px) {
+  .w-sm-auto {
+    width: auto !important;
   }
 }
 

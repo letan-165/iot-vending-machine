@@ -1,6 +1,6 @@
 import { getMachines, updateMachine } from "../api/service/machine.service.js";
 import { createPageShell } from "./shared/page.js";
-import { escapeAttr, escapeHtml, getStatusBadge } from "./shared/format.js";
+import { escapeAttr, escapeHtml, getStatusBadge, maskId } from "./shared/format.js";
 import { actionButton, actionButtons, renderTable } from "./shared/table.js";
 import { getFormValue, openModal, setFormValue, setText } from "./shared/modal.js";
 
@@ -37,7 +37,7 @@ function renderMachinesTable(items) {
       const count = machine.products?.length || 0;
 
       return [
-        `#${escapeHtml(machine.id)}`,
+        maskId(machine.id),
         escapeHtml(machine.location),
         actionButtons([
           actionButton(

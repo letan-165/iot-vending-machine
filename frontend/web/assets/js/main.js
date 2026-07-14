@@ -206,7 +206,7 @@ function renderDashboard() {
   renderTable("recentOrders", {
     columns: ["Mã đơn", "Ngày", "Tổng tiền", "Trạng thái"],
     rows: recentOrders.map((order) => [
-      `#${escapeHtml(order.id)}`,
+      displayId(order.id),
       escapeHtml(order.date),
       formatMoney(order.total),
       getStatusBadge(order.status),
@@ -229,7 +229,7 @@ function renderProducts(products = SAMPLE_DATA.products) {
   renderTable("productsTable", {
     columns: ["ID", "Ảnh", "Tên", "Giá", "Trạng thái", "Thao tác"],
     rows: products.map((product) => [
-      `#${escapeHtml(product.id)}`,
+      displayId(product.id),
       `<img class="product-img" src="${safeImage(product.image)}" alt="${escapeHtml(product.name)}">`,
       productNameCell(product),
       formatMoney(product.price),
@@ -297,7 +297,7 @@ function renderInventory(
   renderTable("inventoryTable", {
     columns: ["ID", "Sản phẩm", "Số lượng", "Trạng thái", "Thao tác"],
     rows: items.map((item) => [
-      `#${escapeHtml(item.id)}`,
+      displayId(item.id),
       escapeHtml(item.name),
       formatNumber(item.quantity),
       getStatusBadge(item.status),
@@ -322,7 +322,7 @@ function renderInventory(
   renderTable("inventoryLogs", {
     columns: ["ID", "Sản phẩm", "Số lượng", "Loại", "Ngày"],
     rows: logs.map((log) => [
-      `#${escapeHtml(log.id)}`,
+      displayId(log.id),
       escapeHtml(log.productName),
       formatNumber(log.quantity),
       getStatusBadge(log.type),
@@ -378,7 +378,7 @@ function renderOrders(orders = SAMPLE_DATA.orders) {
       "Thao tác",
     ],
     rows: orders.map((order) => [
-      `#${escapeHtml(order.id)}`,
+      displayId(order.id),
       escapeHtml(order.date),
       formatMoney(order.total),
       getStatusBadge(order.status),
@@ -431,7 +431,7 @@ function renderUsers(users = SAMPLE_DATA.users) {
   renderTable("usersTable", {
     columns: ["ID", "Username", "Role", "Trạng thái", "Thao tác"],
     rows: users.map((user) => [
-      `#${escapeHtml(user.id)}`,
+      displayId(user.id),
       escapeHtml(user.username),
       getStatusBadge(user.role),
       getStatusBadge(user.status),
@@ -477,7 +477,7 @@ function renderMachines(machines = SAMPLE_DATA.machines) {
   renderTable("machinesTable", {
     columns: ["ID", "Tên máy", "Vị trí", "Sản phẩm", "Trạng thái"],
     rows: machines.map((machine) => [
-      `#${escapeHtml(machine.id)}`,
+      displayId(machine.id),
       escapeHtml(machine.name),
       escapeHtml(machine.location),
       `<a class="btn btn-sm btn-outline-primary" href="inventory.html">
@@ -532,7 +532,7 @@ function renderReports() {
   renderTable("revenueTable", {
     columns: ["Mã đơn", "Ngày", "Trạng thái", "Doanh thu"],
     rows: validOrders.map((order) => [
-      `#${escapeHtml(order.id)}`,
+      displayId(order.id),
       escapeHtml(order.date),
       getStatusBadge(order.status),
       formatMoney(order.total),
@@ -678,7 +678,7 @@ function renderOrderDetail(order) {
 
   return `
     <div class="row g-3 mb-3">
-      <div class="col-md-6">${detailBox("Mã đơn", `#${order.id}`)}</div>
+      <div class="col-md-6">${detailBox("Mã đơn", displayId(order.id))}</div>
       <div class="col-md-6">${detailBox("Ngày tạo", order.date)}</div>
       <div class="col-md-6">${detailBox("Trạng thái", getStatusBadge(order.status))}</div>
       <div class="col-md-6">${detailBox("Thanh toán", getStatusBadge(order.paymentStatus))}</div>
@@ -730,6 +730,11 @@ function statCard(icon, label, value) {
 function handlePendingApi(action, payload) {
   console.info(`TODO fetch API: ${action}`, payload);
   alert("Chức năng này đang chờ gắn fetch API.");
+}
+
+function displayId(value, size = 4) {
+  const text = String(value ?? "");
+  return text ? `....${escapeHtml(text.slice(-size))}` : "--";
 }
 
 function getValue(id) {

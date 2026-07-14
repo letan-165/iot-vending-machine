@@ -1,5 +1,6 @@
 package com.app.vending.iot.dto.response;
 
+import com.app.vending.iot.common.enums.UserRole;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -10,5 +11,6 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class LoginResponse {
     String userID;
+    UserRole role;
     String token;
 }

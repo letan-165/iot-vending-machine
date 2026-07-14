@@ -75,6 +75,7 @@ public class UserService {
 
         return LoginResponse.builder()
                 .userID(user.getId())
+                .role(user.getRole())
                 .token(authService.generate(user))
                 .build();
     }

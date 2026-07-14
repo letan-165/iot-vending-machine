@@ -23,6 +23,7 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -61,7 +62,10 @@ public class MachineLogService {
                 .products(new ArrayList<>())
                 .build();
 
-        for (var productLog : machineLog.getProducts()) {
+        for (var productLog : machineLog.getProducts().stream()
+                .sorted(Comparator.comparing(ProductLog::getDate).reversed())
+                .toList()) {
+
             Product product = productMap.get(productLog.getId());
             ProductLogResponse response = productMapper.toProductLogResponse(productLog);
             response.setName(product.getName());

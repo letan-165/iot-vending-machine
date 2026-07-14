@@ -1,4 +1,7 @@
-import { getMachineById, updateMachineProducts } from "../api/service/machine.service.js";
+import {
+  getMachineById,
+  updateMachineProducts,
+} from "../api/service/machine.service.js";
 import { getLogMachine } from "../api/service/machine-log.service.js";
 import { getProducts } from "../api/service/product.service.js";
 import { createPageShell } from "./shared/page.js";
@@ -11,7 +14,12 @@ import {
   maskId,
   safeImage,
 } from "./shared/format.js";
-import { getFormValue, openModal, setFormValue, setText } from "./shared/modal.js";
+import {
+  getFormValue,
+  openModal,
+  setFormValue,
+  setText,
+} from "./shared/modal.js";
 import { actionButton, actionButtons, renderTable } from "./shared/table.js";
 
 const page = document.body.dataset.page;
@@ -57,17 +65,16 @@ async function loadInventory() {
   }
 
   try {
-    const [machineResult, logResult, productsResult] = await Promise.allSettled([
-      getMachineById(machineId),
-      getLogMachine(machineId),
-      getProducts(),
-    ]);
+    const [machineResult, logResult, productsResult] = await Promise.allSettled(
+      [getMachineById(machineId), getLogMachine(machineId), getProducts()],
+    );
 
     if (machineResult.status !== "fulfilled") throw machineResult.reason;
     if (logResult.status !== "fulfilled") throw logResult.reason;
 
     currentMachine = machineResult.value;
-    allProducts = productsResult.status === "fulfilled" ? productsResult.value || [] : [];
+    allProducts =
+      productsResult.status === "fulfilled" ? productsResult.value || [] : [];
 
     renderMachineHeader(currentMachine);
     renderMachineProducts(currentMachine?.products || []);
@@ -94,18 +101,32 @@ function renderMachineHeader(machine) {
 
 function renderMachineProducts(products) {
   renderTable("inventoryTable", {
-    columns: ["ID", "Ảnh", "Tên", "Giá", "Trạng thái", "Số lượng", "Thao tác"],
+    columns: ["ID", "Ảnh", "Tên", "Giá", "Số lượng", "Thao tác"],
     rows: products.map((product) => [
       maskId(product.id),
       `<img class="product-img" src="${safeImage(product.image)}" alt="${escapeHtml(product.name)}">`,
       `<div class="fw-bold">${escapeHtml(product.name)}</div>`,
       formatMoney(product.price),
-      getStatusBadge(product.status),
       escapeHtml(product.quantity),
       actionButtons([
-        actionButton("Nhập", "bi-plus-circle", "success", `openInventoryModal('IMPORT', '${escapeAttr(product.id)}')`),
-        actionButton("Điều chỉnh", "bi-sliders", "primary", `openInventoryModal('ADJUSTMENT', '${escapeAttr(product.id)}')`),
-        actionButton("Xuất", "bi-box-arrow-right", "danger", `queueOutport('${escapeAttr(product.id)}', ${Number(product.quantity) || 0})`),
+        actionButton(
+          "Nhập",
+          "bi-plus-circle",
+          "success",
+          `openInventoryModal('IMPORT', '${escapeAttr(product.id)}')`,
+        ),
+        actionButton(
+          "Điều chỉnh",
+          "bi-sliders",
+          "primary",
+          `openInventoryModal('ADJUSTMENT', '${escapeAttr(product.id)}')`,
+        ),
+        actionButton(
+          "Xuất",
+          "bi-box-arrow-right",
+          "danger",
+          `queueOutport('${escapeAttr(product.id)}', ${Number(product.quantity) || 0})`,
+        ),
       ]),
     ]),
     emptyMessage: "Máy chưa có sản phẩm.",
@@ -132,8 +153,13 @@ function openInventoryModalUI(mode = "IMPORT", productId = "") {
     return;
   }
 
-  const existingIds = new Set((currentMachine.products || []).map((item) => String(item.id)));
-  const products = mode === "NEW" ? allProducts.filter((item) => !existingIds.has(String(item.id))) : currentMachine.products || [];
+  const existingIds = new Set(
+    (currentMachine.products || []).map((item) => String(item.id)),
+  );
+  const products =
+    mode === "NEW"
+      ? allProducts.filter((item) => !existingIds.has(String(item.id)))
+      : currentMachine.products || [];
   const productSelect = document.getElementById("inventoryProductId");
 
   if (mode === "NEW" && !products.length) {
@@ -157,7 +183,11 @@ function openInventoryModalUI(mode = "IMPORT", productId = "") {
   setFormValue("inventoryQuantity", "");
   setText(
     "inventoryModalTitle",
-    mode === "NEW" ? "Nhập sản phẩm mới" : mode === "IMPORT" ? "Thêm nhập vào danh sách" : "Thêm điều chỉnh vào danh sách",
+    mode === "NEW"
+      ? "Nhập sản phẩm mới"
+      : mode === "IMPORT"
+        ? "Thêm nhập vào danh sách"
+        : "Thêm điều chỉnh vào danh sách",
   );
 
   if (document.getElementById("inventoryModalHint")) {
@@ -177,8 +207,11 @@ function submitInventoryForm() {
   const quantity = Number(getFormValue("inventoryQuantity"));
   const type = getFormValue("inventoryType") || "IMPORT";
   const mode = getFormValue("inventoryMode") || "EXISTING";
-  const productSource = mode === "NEW" ? allProducts : currentMachine?.products || [];
-  const product = productSource.find((item) => String(item.id) === String(productId));
+  const productSource =
+    mode === "NEW" ? allProducts : currentMachine?.products || [];
+  const product = productSource.find(
+    (item) => String(item.id) === String(productId),
+  );
 
   if (!productId || Number.isNaN(quantity) || quantity < 0) {
     showAlert("Vui lòng chọn sản phẩm và nhập số lượng không âm.");
@@ -203,7 +236,9 @@ function queueOutport(productId, quantity) {
     return;
   }
 
-  const product = (currentMachine?.products || []).find((item) => String(item.id) === String(productId));
+  const product = (currentMachine?.products || []).find(
+    (item) => String(item.id) === String(productId),
+  );
   pendingInventory.push({
     id: productId,
     name: product?.name || productId,
@@ -220,7 +255,10 @@ async function savePendingInventory() {
   }
 
   try {
-    await updateMachineProducts(machineId, pendingInventory.map(({ name, ...item }) => item));
+    await updateMachineProducts(
+      machineId,
+      pendingInventory.map(({ name, ...item }) => item),
+    );
     pendingInventory = [];
     renderPendingInventory();
     await loadInventory();
@@ -237,7 +275,14 @@ function renderPendingInventory() {
       escapeHtml(item.name),
       escapeHtml(item.quantity),
       getStatusBadge(item.type),
-      actionButtons([actionButton("Xóa", "bi-trash", "danger", `removePendingInventory(${index})`)]),
+      actionButtons([
+        actionButton(
+          "Xóa",
+          "bi-trash",
+          "danger",
+          `removePendingInventory(${index})`,
+        ),
+      ]),
     ]),
     emptyMessage: "Chưa có mục nào trong danh sách chờ lưu.",
   });

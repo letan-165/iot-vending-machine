@@ -1,29 +1,37 @@
-import { clearAuth, isAuthenticated } from "./shared/session.js";
+import { clearAuth, getAuthRole, isAuthenticated } from "./shared/session.js";
 
 (function () {
   const loginPath = "login.html";
   const currentPath = window.location.pathname.split("/").pop() || "";
-  const redirectToLogin = () => {
-    if (currentPath !== loginPath) {
-      window.location.replace(loginPath);
+
+  const redirectTo = (path) => {
+    if (currentPath !== path) {
+      window.location.replace(path);
     }
   };
 
   window.handleLogout = function handleLogout() {
     clearAuth();
-    redirectToLogin();
+    redirectTo(loginPath);
   };
 
   if (currentPath !== loginPath && !isAuthenticated()) {
-    redirectToLogin();
+    redirectTo(loginPath);
+    return;
+  }
+
+  const role = String(getAuthRole() || "").toUpperCase();
+  const staffAllowedPaths = new Set(["machines.html", "inventory.html", loginPath]);
+  if (role === "STAFF" && !staffAllowedPaths.has(currentPath)) {
+    redirectTo("machines.html");
     return;
   }
 
   window.addEventListener("storage", () => {
-    if (!isAuthenticated()) redirectToLogin();
+    if (!isAuthenticated()) redirectTo(loginPath);
   });
 
   setInterval(() => {
-    if (currentPath !== loginPath && !isAuthenticated()) redirectToLogin();
+    if (currentPath !== loginPath && !isAuthenticated()) redirectTo(loginPath);
   }, 500);
 })();

@@ -48,7 +48,6 @@ export function getStatusBadge(status) {
     LOCKED: "secondary",
     MAINTENANCE: "warning",
     OFFLINE: "danger",
-    OUT_OF_STOCK: "warning",
     PAID: "info",
     PENDING: "warning",
     REFUNDED: "secondary",

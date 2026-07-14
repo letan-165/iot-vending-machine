@@ -14,34 +14,65 @@
     <main class="main-content">
       <div class="topbar">
         <div>
-          <h1 class="page-title">Order Management</h1>
-          <p class="page-subtitle">Xem danh sách đơn hàng theo trạng thái hiện tại từ API.</p>
+          <h1 class="page-title">Đơn hàng</h1>
+          <p class="page-subtitle">Báo cáo tổng hợp ở trên, danh sách đơn hàng chi tiết ở bên dưới.</p>
         </div>
         <div class="d-flex gap-2 flex-wrap"></div>
       </div>
 
-      <section class="panel">
-        <div class="panel-header">
-          <div>
-            <h2 class="h5 fw-bold mb-1">Danh sách đơn hàng</h2>
-            <div class="text-muted small">Trạng thái: PENDING, PAID, COMPLETED, CANCELLED.</div>
+      <div class="row g-3 mb-4">
+        <div class="col-12 col-sm-6 col-xl-3">
+          <div class="stat-card order-stat-card">
+            <div class="stat-icon"><i class="bi bi-receipt"></i></div>
+            <div class="stat-label">Tổng đơn hàng</div>
+            <div id="orderTotalCountMini" class="stat-value">0</div>
           </div>
         </div>
-        <div id="ordersTable" class="panel-body"></div>
-      </section>
-
-      <div class="modal fade" id="orderDetailModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-          <div class="modal-content rounded-4">
-            <div class="modal-header">
-              <h5 class="modal-title fw-bold">Chi tiết đơn hàng</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div id="orderDetailBody" class="modal-body"></div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Đã hiểu</button>
-            </div>
+        <div class="col-12 col-sm-6 col-xl-3">
+          <div class="stat-card order-stat-card">
+            <div class="stat-icon"><i class="bi bi-cash-coin"></i></div>
+            <div class="stat-label">Doanh thu</div>
+            <div id="orderRevenueMini" class="stat-value">0đ</div>
           </div>
+        </div>
+        <div class="col-12 col-sm-6 col-xl-3">
+          <div class="stat-card order-stat-card">
+            <div class="stat-icon"><i class="bi bi-hourglass-split"></i></div>
+            <div class="stat-label">CANCELLED</div>
+            <div id="orderCancelledMini" class="stat-value">0</div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-xl-3">
+          <div class="stat-card order-stat-card">
+            <div class="stat-icon"><i class="bi bi-check2-circle"></i></div>
+            <div class="stat-label">COMPLETED</div>
+            <div id="orderCompletedMini" class="stat-value">0</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-12 col-xl-7">
+          <section class="panel h-100">
+            <div class="panel-header">
+              <div>
+                <h2 class="h5 fw-bold mb-1">Danh sách đơn hàng</h2>
+                <div class="text-muted small">Hiển thị machineId để đối chiếu nhanh từng đơn.</div>
+              </div>
+            </div>
+            <div id="ordersTable" class="panel-body"></div>
+          </section>
+        </div>
+        <div class="col-12 col-xl-5">
+          <section class="panel h-100">
+            <div class="panel-header">
+              <div>
+                <h2 class="h5 fw-bold mb-1">Tổng doanh thu theo machineId</h2>
+                <div class="text-muted small">Gộp doanh thu từ các đơn hàng theo từng máy.</div>
+              </div>
+            </div>
+            <div id="machineRevenueTable" class="panel-body"></div>
+          </section>
         </div>
       </div>
     </main>

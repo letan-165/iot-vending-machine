@@ -29,6 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -49,7 +50,9 @@ public class OrderService {
 
     // STAFF, ADMIN
     public List<Order> getAll() {
-        return orderRepository.findAll();
+        return orderRepository.findAll().stream()
+                .sorted(Comparator.comparing(Order::getDate).reversed())
+                .toList();
     }
 
     // GUEST, STAFF, ADMIN

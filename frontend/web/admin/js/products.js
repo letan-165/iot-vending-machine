@@ -1,6 +1,6 @@
 import { createProduct, getProducts, updateProduct } from "../api/service/product.service.js";
 import { createPageShell } from "./shared/page.js";
-import { escapeAttr, escapeHtml, formatMoney, getStatusBadge, safeImage } from "./shared/format.js";
+import { escapeAttr, escapeHtml, formatMoney, getStatusBadge, maskId, safeImage } from "./shared/format.js";
 import { actionButton, actionButtons, renderTable } from "./shared/table.js";
 import { getFormValue, openModal, setFormValue, setText } from "./shared/modal.js";
 
@@ -33,7 +33,7 @@ function renderProductsTable(items) {
   renderTable("productsTable", {
     columns: ["ID", "Ảnh", "Tên", "Giá", "Trạng thái", "Thao tác"],
     rows: items.map((product) => [
-      `#${escapeHtml(product.id)}`,
+      maskId(product.id),
       `<img class="product-img" src="${safeImage(product.image)}" alt="${escapeHtml(product.name)}">`,
       `<div class="fw-bold">${escapeHtml(product.name)}</div>`,
       formatMoney(product.price),
