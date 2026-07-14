@@ -1,4 +1,7 @@
-import { getOrderById, updateOrderStatus } from "../../admin/api/service/order.service.js";
+import {
+  getOrderByIdPublic,
+  updateOrderStatusPublic,
+} from "./user-payment.service.js";
 
 const paymentAlert = document.getElementById("paymentAlert");
 const paymentAmountText = document.getElementById("paymentAmountText");
@@ -26,7 +29,7 @@ async function loadOrder(orderId) {
   hideAlert();
 
   try {
-    const order = await getOrderById(orderId);
+    const order = await getOrderByIdPublic(orderId);
     currentOrderId = String(order?.id || orderId);
     paymentAmountText.textContent = `Số tiền cần thanh toán: ${formatVnd(order?.total)} VND`;
     setButtonsDisabled(false);
@@ -48,7 +51,7 @@ async function submitStatus(status) {
   hideAlert();
 
   try {
-    await updateOrderStatus(orderId, status);
+    await updateOrderStatusPublic(orderId, status);
   } catch (error) {
     showAlert(error.message || "Không thể cập nhật trạng thái thanh toán.");
   } finally {
