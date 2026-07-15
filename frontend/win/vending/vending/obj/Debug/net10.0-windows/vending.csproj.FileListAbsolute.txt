@@ -20,8 +20,3 @@ C:\Users\letan\Documents\a_School\IOT\btl\vending\vending\obj\Debug\net10.0-wind
 C:\Users\letan\Documents\a_School\IOT\btl\vending\vending\bin\Debug\net10.0-windows\QRCoder.dll
 C:\Users\letan\Documents\a_School\IOT\btl\vending\vending\obj\Debug\net10.0-windows\vending.csproj.AssemblyReference.cache
 C:\Users\letan\Documents\a_School\IOT\btl\vending\vending\obj\Debug\net10.0-windows\vending.csproj.Up2Date
-C:\Users\letan\Documents\a_School\IOT\btl\vending\vending\bin\Debug\net10.0-windows\DotNetEnv.dll
-C:\Users\letan\Documents\a_School\IOT\btl\vending\vending\bin\Debug\net10.0-windows\Microsoft.Extensions.Configuration.dll
-C:\Users\letan\Documents\a_School\IOT\btl\vending\vending\bin\Debug\net10.0-windows\Microsoft.Extensions.Configuration.Abstractions.dll
-C:\Users\letan\Documents\a_School\IOT\btl\vending\vending\bin\Debug\net10.0-windows\Microsoft.Extensions.Primitives.dll
-C:\Users\letan\Documents\a_School\IOT\btl\vending\vending\bin\Debug\net10.0-windows\Superpower.dll

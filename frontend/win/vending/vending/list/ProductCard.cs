@@ -30,7 +30,6 @@ namespace vending
             lblStock.Text = stock.ToString();
 
             selectedQuantity = 0;
-
             UpdateStockLabel();
 
             try
@@ -41,15 +40,28 @@ namespace vending
             {
             }
 
-            if (product.Status != "AVAILABLE")
+            if (stock <= 0)
             {
                 btnPlus.Enabled = false;
                 btnMinus.Enabled = false;
+
+                btnPlus.Text = "Hết hàng";
+                btnPlus.Width = 100;  
+                btnMinus.Visible = false;
+
+                lblQuantity.Visible = false;
+                lblStock.Visible = false;
             }
             else
             {
                 btnPlus.Enabled = true;
                 btnMinus.Enabled = true;
+
+                btnPlus.Text = "+";
+                btnMinus.Visible = true;
+
+                lblQuantity.Visible = true;
+                lblStock.Visible = true;
             }
         }
 

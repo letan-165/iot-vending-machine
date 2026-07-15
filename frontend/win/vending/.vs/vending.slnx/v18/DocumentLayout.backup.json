@@ -3,24 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\letan\\Documents\\a_School\\IOT\\btl\\vending\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E126E0DE-8710-1338-C39B-76DCB3C7B750}|vending\\vending.csproj|c:\\users\\letan\\documents\\a_school\\iot\\btl\\vending\\vending\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E126E0DE-8710-1338-C39B-76DCB3C7B750}|vending\\vending.csproj|solutionrelative:vending\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E126E0DE-8710-1338-C39B-76DCB3C7B750}|vending\\vending.csproj|c:\\users\\letan\\documents\\a_school\\iot\\btl\\vending\\vending\\.env||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{E126E0DE-8710-1338-C39B-76DCB3C7B750}|vending\\vending.csproj|solutionrelative:vending\\.env||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E126E0DE-8710-1338-C39B-76DCB3C7B750}|vending\\vending.csproj|c:\\users\\letan\\documents\\a_school\\iot\\btl\\vending\\vending\\service\\apiclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E126E0DE-8710-1338-C39B-76DCB3C7B750}|vending\\vending.csproj|solutionrelative:vending\\service\\apiclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{E126E0DE-8710-1338-C39B-76DCB3C7B750}|vending\\vending.csproj|c:\\users\\letan\\documents\\a_school\\iot\\btl\\vending\\vending\\page\\productpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E126E0DE-8710-1338-C39B-76DCB3C7B750}|vending\\vending.csproj|solutionrelative:vending\\page\\productpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E126E0DE-8710-1338-C39B-76DCB3C7B750}|vending\\vending.csproj|c:\\users\\letan\\documents\\a_school\\iot\\btl\\vending\\vending\\page\\productpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{E126E0DE-8710-1338-C39B-76DCB3C7B750}|vending\\vending.csproj|C:\\Users\\letan\\Documents\\a_School\\IOT\\btl\\vending\\vending\\page\\productpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{E126E0DE-8710-1338-C39B-76DCB3C7B750}|vending\\vending.csproj|solutionrelative:vending\\page\\productpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E126E0DE-8710-1338-C39B-76DCB3C7B750}|vending\\vending.csproj|c:\\users\\letan\\documents\\a_school\\iot\\btl\\vending\\vending\\page\\paymentpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E126E0DE-8710-1338-C39B-76DCB3C7B750}|vending\\vending.csproj|solutionrelative:vending\\page\\paymentpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E126E0DE-8710-1338-C39B-76DCB3C7B750}|vending\\vending.csproj|c:\\users\\letan\\documents\\a_school\\iot\\btl\\vending\\vending\\page\\resultpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E126E0DE-8710-1338-C39B-76DCB3C7B750}|vending\\vending.csproj|solutionrelative:vending\\page\\resultpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E126E0DE-8710-1338-C39B-76DCB3C7B750}|vending\\vending.csproj|c:\\users\\letan\\documents\\a_school\\iot\\btl\\vending\\vending\\service\\orderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E126E0DE-8710-1338-C39B-76DCB3C7B750}|vending\\vending.csproj|solutionrelative:vending\\service\\orderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E126E0DE-8710-1338-C39B-76DCB3C7B750}|vending\\vending.csproj|C:\\Users\\letan\\Documents\\a_School\\IOT\\btl\\vending\\vending\\page\\paymentpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{E126E0DE-8710-1338-C39B-76DCB3C7B750}|vending\\vending.csproj|solutionrelative:vending\\page\\paymentpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E126E0DE-8710-1338-C39B-76DCB3C7B750}|vending\\vending.csproj|c:\\users\\letan\\documents\\a_school\\iot\\btl\\vending\\vending\\model\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E126E0DE-8710-1338-C39B-76DCB3C7B750}|vending\\vending.csproj|solutionrelative:vending\\model\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -43,66 +51,86 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\letan\\Documents\\a_School\\IOT\\btl\\vending\\vending\\Program.cs",
-              "RelativeDocumentMoniker": "vending\\Program.cs",
-              "ToolTip": "C:\\Users\\letan\\Documents\\a_School\\IOT\\btl\\vending\\vending\\Program.cs",
-              "RelativeToolTip": "vending\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAA2AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-07T17:47:11.05Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": ".env",
-              "DocumentMoniker": "C:\\Users\\letan\\Documents\\a_School\\IOT\\btl\\vending\\vending\\.env",
-              "RelativeDocumentMoniker": "vending\\.env",
-              "ToolTip": "C:\\Users\\letan\\Documents\\a_School\\IOT\\btl\\vending\\vending\\.env",
-              "RelativeToolTip": "vending\\.env",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-07-07T17:45:58.465Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "ProductPage.cs",
               "DocumentMoniker": "C:\\Users\\letan\\Documents\\a_School\\IOT\\btl\\vending\\vending\\page\\ProductPage.cs",
               "RelativeDocumentMoniker": "vending\\page\\ProductPage.cs",
               "ToolTip": "C:\\Users\\letan\\Documents\\a_School\\IOT\\btl\\vending\\vending\\page\\ProductPage.cs",
               "RelativeToolTip": "vending\\page\\ProductPage.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAcAAAAAAAAAA==",
+              "ViewState": "AgIAAIAAAAAAAAAAAAAYwJ4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-07T17:45:01.998Z",
+              "WhenOpened": "2026-07-14T08:30:02.236Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "ProductPage.cs [Design]",
               "DocumentMoniker": "C:\\Users\\letan\\Documents\\a_School\\IOT\\btl\\vending\\vending\\page\\ProductPage.cs",
               "RelativeDocumentMoniker": "vending\\page\\ProductPage.cs",
               "ToolTip": "C:\\Users\\letan\\Documents\\a_School\\IOT\\btl\\vending\\vending\\page\\ProductPage.cs [Design]",
               "RelativeToolTip": "vending\\page\\ProductPage.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-07T17:44:59.679Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2026-07-14T08:23:41.738Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "OrderService.cs",
+              "DocumentMoniker": "C:\\Users\\letan\\Documents\\a_School\\IOT\\btl\\vending\\vending\\service\\OrderService.cs",
+              "RelativeDocumentMoniker": "vending\\service\\OrderService.cs",
+              "ToolTip": "C:\\Users\\letan\\Documents\\a_School\\IOT\\btl\\vending\\vending\\service\\OrderService.cs",
+              "RelativeToolTip": "vending\\service\\OrderService.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAAA1wD0AAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-14T08:03:28.586Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ResultPage.cs",
+              "DocumentMoniker": "C:\\Users\\letan\\Documents\\a_School\\IOT\\btl\\vending\\vending\\page\\ResultPage.cs",
+              "RelativeDocumentMoniker": "vending\\page\\ResultPage.cs",
+              "ToolTip": "C:\\Users\\letan\\Documents\\a_School\\IOT\\btl\\vending\\vending\\page\\ResultPage.cs",
+              "RelativeToolTip": "vending\\page\\ResultPage.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-14T08:02:51.16Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "ApiClient.cs",
-              "DocumentMoniker": "C:\\Users\\letan\\Documents\\a_School\\IOT\\btl\\vending\\vending\\service\\ApiClient.cs",
-              "RelativeDocumentMoniker": "vending\\service\\ApiClient.cs",
-              "ToolTip": "C:\\Users\\letan\\Documents\\a_School\\IOT\\btl\\vending\\vending\\service\\ApiClient.cs",
-              "RelativeToolTip": "vending\\service\\ApiClient.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAA+AAAAAAAAAA==",
+              "Title": "PaymentPage.cs",
+              "DocumentMoniker": "C:\\Users\\letan\\Documents\\a_School\\IOT\\btl\\vending\\vending\\page\\PaymentPage.cs",
+              "RelativeDocumentMoniker": "vending\\page\\PaymentPage.cs",
+              "ToolTip": "C:\\Users\\letan\\Documents\\a_School\\IOT\\btl\\vending\\vending\\page\\PaymentPage.cs",
+              "RelativeToolTip": "vending\\page\\PaymentPage.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-07T17:44:38.119Z",
+              "WhenOpened": "2026-07-14T07:57:55.006Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "PaymentPage.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\letan\\Documents\\a_School\\IOT\\btl\\vending\\vending\\page\\PaymentPage.cs",
+              "RelativeDocumentMoniker": "vending\\page\\PaymentPage.cs",
+              "ToolTip": "C:\\Users\\letan\\Documents\\a_School\\IOT\\btl\\vending\\vending\\page\\PaymentPage.cs [Design]",
+              "RelativeToolTip": "vending\\page\\PaymentPage.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-14T07:57:53.255Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Product.cs",
+              "DocumentMoniker": "C:\\Users\\letan\\Documents\\a_School\\IOT\\btl\\vending\\vending\\model\\Product.cs",
+              "RelativeDocumentMoniker": "vending\\model\\Product.cs",
+              "ToolTip": "C:\\Users\\letan\\Documents\\a_School\\IOT\\btl\\vending\\vending\\model\\Product.cs",
+              "RelativeToolTip": "vending\\model\\Product.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-14T07:30:35.785Z"
             }
           ]
         }

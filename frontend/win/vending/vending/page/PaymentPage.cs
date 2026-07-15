@@ -13,6 +13,8 @@ namespace vending.page
         private Order order; 
         private readonly string orderId;
         private int seconds = 20;
+        //private const string PAYMENT_URL = "http://127.0.0.1:5500/user-payment.html?orderId=";
+        private const string PAYMENT_URL = "https://iot-vending-machine.netlify.app/user-payment.html?orderId=";
 
         public PaymentPage(string orderId)
         {
@@ -25,8 +27,8 @@ namespace vending.page
             try
             {
                 order = await orderService.GetOrder(orderId);
-                ShowOrder();
-                GenerateQRCode("https://google.com");
+                ShowOrder(); 
+                GenerateQRCode($"{PAYMENT_URL}{orderId}");
                 lblCountdown.Text = $"Đơn hàng sẽ tự hủy sau: {seconds}s";
 
                 timerCheckStatus.Interval = 1000;
@@ -75,15 +77,15 @@ namespace vending.page
 
                 if (status == "PAID")
                 {
-                    StopTimers();
-                    ResultPage page = new ResultPage(true);
+                    StopTimers(); 
+                    ResultPage page = new ResultPage(true, orderId);
                     page.Show();
                     Hide();
                 }
                 else if (status == "CANCELLED")
                 {
-                    StopTimers();
-                    ResultPage page = new ResultPage(false);
+                    StopTimers(); 
+                    ResultPage page = new ResultPage(false, orderId);
                     page.Show();
                     Hide();
                 }
@@ -110,7 +112,7 @@ namespace vending.page
 
                 }
 
-                ResultPage page = new ResultPage(false);
+                ResultPage page = new ResultPage(false, orderId);
                 page.Show();
 
                 Hide();

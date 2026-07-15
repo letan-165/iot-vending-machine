@@ -1,24 +1,37 @@
 ﻿using System;
 using System.Windows.Forms;
+using vending.service;
 
 namespace vending.page
 {
     public partial class ResultPage : Form
     {
         private readonly bool success;
-        private int seconds = 5;
-        public ResultPage(bool success)
+        private int seconds = 10;
+        private readonly string orderId;
+        private readonly OrderService orderService = new OrderService();
+        public ResultPage(bool success, string orderId)
         {
             InitializeComponent();
             this.success = success;
+            this.orderId = orderId;
         }
 
-        private void ResultPage_Load(object sender, EventArgs e)
+        private async void ResultPage_Load(object sender, EventArgs e)
         {
             if (success)
             {
                 lblResult.Text = "THANH TOÁN THÀNH CÔNG";
                 lblResult.ForeColor = System.Drawing.Color.Green;
+
+                try
+                {
+                    await orderService.CompleteOrder(orderId);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
             else
             {

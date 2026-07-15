@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Json;
 using System.Windows.Forms;
 using vending.model;
+using vending.network;
 using vending.service;
 
 namespace vending.page
@@ -10,29 +10,61 @@ namespace vending.page
     public partial class ProductPage : Form
     {
         private List<Product> products = new List<Product>();
+
         private readonly MachineService machineService = new MachineService();
-        private readonly List<ProductCard> cards = new List<ProductCard>();
         private readonly OrderService orderService = new OrderService();
-        private const string MACHINE_ID ="6a4b57640346a449bc73f519";
+        private readonly List<ProductCard> cards = new List<ProductCard>();
+
+        private bool isChecking = false;
+        private int dotCount = 0;
+
+        private const string MACHINE_ID = "6a4b57640346a449bc73f519";
 
         public ProductPage()
         {
             InitializeComponent();
         }
 
-        private async void ProductPage_Load(object sender, EventArgs e)
+        private void ProductPage_Load(object sender, EventArgs e)
         {
+            lblTitle.Text = "Đang kết nối đến server";
+
+            healthTimer.Interval = 1000;
+            healthTimer.Start();
+        }
+
+        private async void healthTimer_Tick(object sender, EventArgs e)
+        {
+            if (isChecking)
+                return;
+
+            isChecking = true;
+
+            dotCount = (dotCount + 1) % 4;
+            lblTitle.Text = "Đang kết nối đến server" + new string('.', dotCount);
+
             try
             {
-                products = (await machineService
-                    .GetMachine("6a4b57640346a449bc73f519"))
-                    .Products;
+                var response = await ApiClient.Client.GetAsync("health");
+
+                if (!response.IsSuccessStatusCode)
+                    return;
+
+                healthTimer.Stop();
+
+                lblTitle.Text = "Máy bán hàng tự động";
+
+                products = (await machineService.GetMachine(MACHINE_ID)).Products;
 
                 ShowProducts();
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show(ex.Message);
+                // Server chưa sẵn sàng, timer sẽ tự gọi lại sau 1 giây
+            }
+            finally
+            {
+                isChecking = false;
             }
         }
 
@@ -47,7 +79,6 @@ namespace vending.page
             foreach (var product in products)
             {
                 ProductCard card = new ProductCard();
-
                 card.SetData(product);
 
                 cards.Add(card);
@@ -68,10 +99,11 @@ namespace vending.page
         {
             try
             {
-                CreateOrderRequest request = new CreateOrderRequest();
-
-                request.MachineId = MACHINE_ID;
-                request.Products = new List<CreateOrderItem>();
+                CreateOrderRequest request = new CreateOrderRequest
+                {
+                    MachineId = MACHINE_ID,
+                    Products = new List<CreateOrderItem>()
+                };
 
                 foreach (var card in cards)
                 {
@@ -85,7 +117,6 @@ namespace vending.page
                     }
                 }
 
-
                 if (request.Products.Count == 0)
                 {
                     MessageBox.Show("Vui lòng chọn sản phẩm.");
@@ -95,7 +126,6 @@ namespace vending.page
                 string orderId = await orderService.CreateOrder(request);
 
                 PaymentPage page = new PaymentPage(orderId);
-
                 page.Show();
 
                 Hide();

@@ -56,6 +56,16 @@ namespace vending.service
             response.EnsureSuccessStatusCode();
         }
 
+        public async Task CompleteOrder(string orderId)
+        {
+            HttpResponseMessage response =
+                await ApiClient.Client.PutAsync(
+                    $"orders/completed/{orderId}",
+                    null);
+
+            response.EnsureSuccessStatusCode();
+        }
+
         public async Task<string> CreateOrder(CreateOrderRequest request)
         {
             string json = JsonSerializer.Serialize(request);

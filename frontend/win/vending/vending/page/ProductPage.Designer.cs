@@ -28,9 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             btnOrder = new Button();
             tableProducts = new TableLayoutPanel();
             lblTitle = new Label();
+            healthTimer = new System.Windows.Forms.Timer(components);
             SuspendLayout();
             // 
             // btnOrder
@@ -74,6 +76,10 @@
             lblTitle.TextAlign = ContentAlignment.MiddleCenter;
             lblTitle.Click += lblTitle_Click_1;
             // 
+            // healthTimer
+            // 
+            healthTimer.Tick += healthTimer_Tick;
+            // 
             // ProductPage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -97,5 +103,6 @@
         private Button btnOrder;
         private TableLayoutPanel tableProducts;
         private Label lblTitle;
+        private System.Windows.Forms.Timer healthTimer;
     }
 }
