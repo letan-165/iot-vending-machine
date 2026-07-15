@@ -92,5 +92,15 @@ namespace vending.service
 
             return apiResponse.Result;
         }
+
+        public async Task UpdateOrderStatus(string orderId, string status)
+        {
+            HttpResponseMessage response =
+                await ApiClient.Client.PutAsync(
+                    $"orders/pending/{orderId}/status/{status}",
+                    null);
+
+            response.EnsureSuccessStatusCode();
+        }
     }
 }
