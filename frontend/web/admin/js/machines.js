@@ -1,4 +1,4 @@
-import { getMachines, updateMachine } from "../api/service/machine.service.js";
+import { createMachine, getMachines, updateMachine } from "../api/service/machine.service.js";
 import { createPageShell } from "./shared/page.js";
 import { escapeAttr, escapeHtml, getStatusBadge, maskId } from "./shared/format.js";
 import { actionButton, actionButtons, renderTable } from "./shared/table.js";
@@ -80,7 +80,11 @@ async function submitMachineForm() {
   };
 
   try {
-    if (id) await updateMachine(id, payload);
+    if (id) {
+      await updateMachine(id, payload);
+    } else {
+      await createMachine(payload);
+    }
     machineModal?.hide();
     await loadMachines();
   } catch (error) {
